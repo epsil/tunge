@@ -1,17 +1,18 @@
 Rapport om prototype til en tungestyrt musepeker for bevegelseshemmede.
+**[HTML-utgave](http://epsil.github.io/tunge/)**,
 **[PDF-utgave](https://raw.github.com/epsil/tunge/master/rapport.pdf)**.
 
-----
+* * * * *
 
 Virtuell arm for funksjonshemmede
 =================================
 
-![](https://raw.github.com/epsil/tunge/master/fig/hist-logo.png)
+![](fig/hist-logo.png)
 
 Stian Rishaug, Bastian S. Solem, Aleksander Uthus og Vegard Øye.
 Veileder: Herman Ranes. Oppdragsgiver: SINTEF.
 
-----
+* * * * *
 
 ### Sammendrag
 
@@ -183,7 +184,7 @@ er ingen valgt bort.
 2.1 Teori: forspenning av trykksensorene
 ----------------------------------------
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/trykksensor.png)
+> ![](fig/trykksensor.png)
 >
 > **Figur 2.1:** Resistive trykksensorer
 
@@ -198,7 +199,7 @@ Dermed fungerer sensorene som en variabel motstand under trykk (jo
 høyere trykk, jo lavere resistans), og som et brudd (uendelig
 resistans) ellers.
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/fsrguide.png)
+> ![](fig/fsrguide.png)
 >
 > **Figur 2.2:** Sensor type FSR-400 (a), sensor type FSR-402 (b).
 > Millimetermål er gitt i klammer.
@@ -208,7 +209,7 @@ typer (fig. 2.2): (a) en *liten* sensor med en diameter på 8 mm
 (FSR-400), og (b) en *stor* sensor på 18 mm (FSR-402). Det
 trykkfølsomme området er litt mindre og er på hhv. 5 mm og 14 mm.
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/sensor.png)
+> ![](fig/sensor.png)
 >
 > **Figur 2.3:** Forspenning av trykksensor (a), spenningsdeling (b) og brudd (c)
 
@@ -255,7 +256,7 @@ den målte spenningen, og når trykket minker, så minker spenningen. Når
 verdien 0. Dette er det ideelle *nullnivået*, verdien når sensoren
 ikke er i bruk.
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/vin.png)
+> ![](fig/vin.png)
 >
 > **Figur 2.4:** `V_IN` som funksjon av `R` og `R_S`, ligning (2.1)
 
@@ -363,7 +364,7 @@ nullnivået med jevne mellomrom.
 >     2                    8,70                  26,70            87
 >     --------------------------------------------------------------------
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/sensormalinger1.png)
+> ![](fig/sensormalinger1.png)
 >
 > **Figur 2.5:** Liten sensor, varierende vekt (tabell 2.2)
 
@@ -415,11 +416,11 @@ den ulineære sammenhengen i ligning (2.1).
 Spenningsstigningen har noen ujevnheter, dette kan være fordi
 kontaktpunktet har en unøyaktighet på ±1 mm når vektene tas av.
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/malepinne.png)
+> ![](fig/malepinne.png)
 >
 > **Figur 2.6:** Arm for å legge vekt(er) på sensorene
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/sensorpress.png)
+> ![](fig/sensorpress.png)
 >
 > **Figur 2.7:** Sensor under trykk
 
@@ -469,21 +470,21 @@ kontaktpunktet har en unøyaktighet på ±1 mm når vektene tas av.
 >     2,08      70,20      12                   253,66          9,54
 >     -----------------------------------------------------------------------
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/sensormalinger2.png)
+> ![](fig/sensormalinger2.png)
 >
 > (a) Spenning mot trykk
 >
-> ![](https://raw.github.com/epsil/tunge/master/fig/sensormalinger3.png)
+> ![](fig/sensormalinger3.png)
 >
 > (b) Motstand mot trykk, utregnet fra (a)
 >
 > **Figur 2.8:** Liten sensor, økende vekt, vektene av mellom hver måling (tabell 2.3)
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/sensormalinger4.png)
+> ![](fig/sensormalinger4.png)
 >
 > (a) Spenning mot trykk
 >
-> ![](https://raw.github.com/epsil/tunge/master/fig/sensormalinger5.png)
+> ![](fig/sensormalinger5.png)
 >
 > (b) Motstand mot trykk, utregnet fra (a)
 >
@@ -544,11 +545,11 @@ hendelsesaktivering.
 >     2,25      96,30      18                   274,39          8,20
 >     -----------------------------------------------------------------------
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/sensormalinger6.png)
+> ![](fig/sensormalinger6.png)
 >
 > (a) Spenning mot trykk
 >
-> ![](https://raw.github.com/epsil/tunge/master/fig/sensormalinger7.png)
+> ![](fig/sensormalinger7.png)
 >
 > (b) Motstand mot trykk, utregnet fra (a)
 >
@@ -581,11 +582,11 @@ hendelsesaktivering.
 >     2,42      96,30      18                   295,12          7,05
 >     -----------------------------------------------------------------------
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/sensormalinger8.png)
+> ![](fig/sensormalinger8.png)
 >
 > (a) Spenning mot trykk
 >
-> ![](https://raw.github.com/epsil/tunge/master/fig/sensormalinger9.png)
+> ![](fig/sensormalinger9.png)
 >
 > (b) Motstand mot trykk, utregnet fra (a)
 >
@@ -605,7 +606,7 @@ hendelsesaktivering.
 3.1 Problemstilling
 -------------------
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/prototypeGammel.png)
+> ![](fig/prototypeGammel.png)
 >
 > **Figur 3.1:** Skisse av prototype, laget i AutoCAD
 
@@ -631,7 +632,7 @@ båndet gikk over hodet, det andre bak (fig. 3.2a). Dette fungerte, men
 det var uten muligheter til å justere og oppfylte derfor ikke alle
 kravene i produktspesifikasjonen.
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/prototype1.png)
+> ![](fig/prototype1.png)
 >
 > **Figur 3.2:** Første (a) og andre (b) utkast av prototype for hodebøylen
 
@@ -653,7 +654,7 @@ at det er veldig solid og meget slitesterkt, og hvis en bøyer det i
 forkant, er det veldig stivt. Derfor er det mulighet til å få det
 veldig stramt imellom kinn og sensor.
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/justering.png)
+> ![](fig/justering.png)
 >
 > **Figur 3.3:** Justeringsboks med lokk (a) og uten lokk (b)
 
@@ -681,7 +682,7 @@ ble det brukt to metallplater, en på hver side. Deretter ble de små
 kretskortene som sensorene er koblet sammen på, festet på
 metallplatene.
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/heleGreia.png)
+> ![](fig/heleGreia.png)
 >
 > **Figur 3.4:** Tegning av hodebøylens justeringsmuligheter
 
@@ -698,7 +699,7 @@ ta imot. På enden av kabelen ble det montert et motstykke til en
 COM-port, dette for å gjøre det enkelt å koble hodebøylen til
 «X-box»-en i kapittel 4 (fig. 3.5).
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/overgangtilCOM.png)
+> ![](fig/overgangtilCOM.png)
 >
 > **Figur 3.5:** Bilde av signalkabel
 
@@ -715,7 +716,7 @@ være enkelt å løse på en ev. ferdig versjon ved hjelp av noen som har
 en bedre bakgrunn i mekanikk og ev. annet utstyr som gruppen ikke
 hadde til rådighet.)
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/prototype2.png)
+> ![](fig/prototype2.png)
 >
 > **Figur 3.6:** Ferdig prototype
 
@@ -730,7 +731,7 @@ hadde til rådighet.)
 4.1 Problemstilling
 -------------------
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/x-boxsalangt.png)
+> ![](fig/x-boxsalangt.png)
 >
 > **Figur 4.1:** Skisse av «X-box», laget i AutoCAD
 
@@ -758,7 +759,7 @@ ene siden var loddet fast til kretskortet, den andre enden til
 COM-porten. Nå var det altså bare å koble i headsettet på den ene
 siden, og maskinen med USB på den andre. «That's Plug 'n' Play!»
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/x-box2.png)
+> ![](fig/x-box2.png)
 >
 > **Figur 4.2:** Bilde av «X-box» fra toppen
 
@@ -770,7 +771,7 @@ Den har en COM-port som var gruppens løsning for å på en enkel måte
 koble til hodebøylen. Videre går data fra hodebøylen inn til
 kretskortet, og videre til maskinen som utfører ønskede operasjoner.
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/x-box1.png)
+> ![](fig/x-box1.png)
 >
 > **Figur 4.3:** Bilde av ferdig «X-box»
 
@@ -826,7 +827,7 @@ problem for prototypen, som bare bruker seks ADC-porter. Men ønsker
 man å bruke portene PF0 og PF3, kan kretsen endres ved å fysisk fjerne
 tilkoblingen til temperaturavlesningen.
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/USBkey.png)
+> ![](fig/USBkey.png)
 >
 > **Figur 5.1:** AT90USBKey
 
@@ -866,7 +867,7 @@ nøyaktige utspenningen fra denne kan beregnes fra formelen
 Dette gir en utspenning på `V_CC3` = 3,266 V. Denne spenningen blir
 også benyttet av sensorene som er koblet til.
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/power.png)
+> ![](fig/power.png)
 >
 > **Figur 5.2:** AT90USBKey-powerkrets
 
@@ -922,7 +923,7 @@ ta høyde for at sensorene kan henge seg opp, og kalibrere deretter.
 6.2 Plassering av sensorene
 ---------------------------
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/bevsensor.png)
+> ![](fig/bevsensor.png)
 >
 > **Figur 6.1:** Sensorplate med tre bevegelsessensorer i linje (a) og trekant (b)
 
@@ -959,7 +960,7 @@ tilnærming*.
 6.3 Første tilnærming
 ---------------------
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/bevsensorfirkant1.png)
+> ![](fig/bevsensorfirkant1.png)
 >
 > **Figur 6.2:** Første tilnærming: knapper på venstre kinn (a)
 > og bevegelse på høyre kinn (b)
@@ -971,7 +972,7 @@ i «stjerne» og svarer til himmelretningene på et kompass - ved å
 presse på den øverste sensoren, går pekeren oppover, osv. Når trykket
 forsvinner, slutter bevegelsen.
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/retninger.png)
+> ![](fig/retninger.png)
 >
 > **Figur 6.3:** Retninger i intervallet 0-90°.
 > Tallene på aksene ganges med basishastigheten.
@@ -1015,7 +1016,7 @@ Når dette er oppfylt, sier vi at vi «har et sprang». Marginen er
 fastsatt på forhånd, og er litt større for de store sensorene på
 knappkinnet enn de små sensorene på bevegelseskinnet.
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/kalibrering.png)
+> ![](fig/kalibrering.png)
 >
 > **Figur 6.4:** Selvkalibrering og avlesning av sensor
 
@@ -1051,9 +1052,9 @@ tabell, og de seks nullnivåene, som disse sammenlignes med, i en
 annen. Det går så igjennom tabellene parvis og sjekker dem opp mot
 ligning (6.1) - på leting etter en aktiv sensor.
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/sensortabenkel.png)
+> ![](fig/sensortabenkel.png)
 >
-> ![](https://raw.github.com/epsil/tunge/master/fig/sensortabtung.png)
+> ![](fig/sensortabtung.png)
 >
 > **Figur 6.5:** Avlesningsløkker: enkel (a) og avansert (b)
 
@@ -1116,7 +1117,7 @@ mer omfattende, men også mer komfortabelt.
 6.4 Andre tilnærming
 --------------------
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/bevsensorfirkant2.png)
+> ![](fig/bevsensorfirkant2.png)
 >
 > **Figur 6.6:** Andre tilnærming: knapper (a) og bevegelse (b).
 
@@ -1134,9 +1135,9 @@ Den viktigste forskjellen er måten pekeren styres på.
 
 ### 6.4.1 Normalmodus
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/normalmodusstart.png)
+> ![](fig/normalmodusstart.png)
 >
-> ![](https://raw.github.com/epsil/tunge/master/fig/normalmodusbev.png)
+> ![](fig/normalmodusbev.png)
 >
 > **Figur 6.7:** Normalmodus: klikk (a) og bevegelse (b)
 
@@ -1166,11 +1167,11 @@ For presisjonens skyld er diagonal bevegelse *deaktivert* når pekeren
 beveges med lette trykk. Det er bare mulig å bevege seg diagonalt ved
 å presse kontinuerlig på sensorene.
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/dramodus.png)
+> ![](fig/dramodus.png)
 >
 > **Figur 6.8:** «Dra»-modus
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/scrollmodus.png)
+> ![](fig/scrollmodus.png)
 >
 > **Figur 6.9:** «Scroll»-modus
 
@@ -1266,9 +1267,9 @@ unødvendig (se kapittel 10).
 
 ### 7.2.1 Resultater første tilnærming
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/brukertest.png)
+> ![](fig/brukertest.png)
 >
-> ![](https://raw.github.com/epsil/tunge/master/fig/brukertestresultat1a.png)
+> ![](fig/brukertestresultat1a.png)
 >
 > **Figur 7.1:** Testtegning for bruk over tid (a), resultat i første
 > tilnærming (b), første og eneste forsøk
@@ -1302,11 +1303,11 @@ For drøfting av resultatene, se avsnitt 6.3.3.
 
 ### 7.2.2 Resultater andre tilnærming
 
-> ![](https://raw.github.com/epsil/tunge/master/fig/brukertest.png)
+> ![](fig/brukertest.png)
 >
-> ![](https://raw.github.com/epsil/tunge/master/fig/brukertestresultat2a.png)
+> ![](fig/brukertestresultat2a.png)
 >
-> ![](https://raw.github.com/epsil/tunge/master/fig/brukertestresultat2b.png)
+> ![](fig/brukertestresultat2b.png)
 >
 > **Figur 7.2:** Testtegning for bruk over tid (a), resultat i andre
 > tilnærming første forsøk (b), andre forsøk (c)
