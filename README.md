@@ -1,6 +1,5 @@
 Rapport om prototype til en tungestyrt musepeker for bevegelseshemmede.
-**[HTML-utgave](http://epsil.github.io/tunge/)**,
-**[PDF-utgave](https://raw.github.com/epsil/tunge/master/rapport.pdf)**.
+**[PDF-utgave](rapport.pdf)**.
 
 * * * * *
 
@@ -10,7 +9,10 @@ Virtuell arm for funksjonshemmede
 ![](fig/hist-logo.png)
 
 Stian Rishaug, Bastian S. Solem, Aleksander Uthus og Vegard Øye.
-Veileder: Herman Ranes. Oppdragsgiver: SINTEF.
+
+Veileder: Herman Ranes.
+
+Oppdragsgiver: SINTEF.
 
 * * * * *
 
@@ -74,13 +76,13 @@ løsning på problemstillingen.
 
 *Ansatte ved HiST*
 
-- Herman Ranes
-- Rolf Kristian Snilsberg
+-   Herman Ranes
+-   Rolf Kristian Snilsberg
 
 *Personer med tilknytning til rapporten*
 
-- Tone Berg
-- Mats Ekström
+-   Tone Berg
+-   Mats Ekström
 
 Trondheim, 24. mai 2009
 
@@ -107,10 +109,10 @@ bachelor i elektro- og datateknikk: fordypning i elektronikk ved
 Høyskolen i Sør-Trøndelag. Ved tidligere prosjekter er det gjort
 forsøk med:
 
-- Induktive følere (reagerer på metall og er billige i innkjøp)
-- Touch (en form for kapasitiv føler)
-- IR (Vanskelig metode for avlesning)
-- Kapasitive følere (svært dyre i innkjøp)
+-   Induktive følere (reagerer på metall og er billige i innkjøp)
+-   Touch (en form for kapasitiv føler)
+-   IR (Vanskelig metode for avlesning)
+-   Kapasitive følere (svært dyre i innkjøp)
 
 Det er ønskelig at gruppen starter prosjektet fra «scratch», for å se
 om resultatet benytter seg av alternative metoder til dem som er brukt
@@ -130,17 +132,18 @@ sensordata.
 
 ### 1.2.1 Hva skal gjøres og hvordan
 
-- Kartlegge hvordan de utdelte sensorene kan brukes (kap. 2).
-- Det skal lages en hodebøyle for enkel bruk av datamusen (kap. 3).
-- Det skal lages en krets for signalbehandling, fortrinnsvis en
-  mikrokontroller med ADC (kap. 5).
-- Overføringsgrensesnitt mot Microsoft Windows - Bluetooth/USB
-  (kap. 5).
-- Det skal tas standpunkt til hvor prosesseringen av data skal foregå,
-  før eller etter signalet har kommet til datamaskinen (kap. 5).
-- Valg av sensorkonfigurasjon, antall og plassering, brukergrensesnitt
-  (kap. 6).
-- Program for tolkning av avlest sensordata må skrives (kap. 6).
+-   Kartlegge hvordan de utdelte sensorene kan brukes (kap. 2).
+-   Det skal lages en hodebøyle for enkel bruk av datamusen (kap. 3).
+-   Det skal lages en krets for signalbehandling, fortrinnsvis en
+    mikrokontroller med ADC (kap. 5).
+-   Overføringsgrensesnitt mot Microsoft Windows -- Bluetooth/USB
+    (kap. 5).
+-   Det skal tas standpunkt til hvor prosesseringen av data skal
+    foregå, før eller etter signalet har kommet til datamaskinen (kap.
+    5).
+-   Valg av sensorkonfigurasjon, antall og plassering,
+    brukergrensesnitt (kap. 6).
+-   Program for tolkning av avlest sensordata må skrives (kap. 6).
 
 ### 1.2.2 Overordnet spesifikasjon av konseptet
 
@@ -148,26 +151,26 @@ Bruken av funksjonene er beskrevet i kapittel 6, som tar for seg
 funksjonalitet og brukergrensesnitt. Konseptet skal inneholde disse
 standard musefunksjonene:
 
-- Bevegelse
-  - Horisontal
-  - Vertikal
-  - Diagonalt
-  - 3 Hastigheter
-- Knapper
-  - Venstre museknapp
-  - Høyre museknapp
-  - Scroll
+-   Bevegelse
+    -   Horisontal
+    -   Vertikal
+    -   Diagonalt
+    -   3 Hastigheter
+-   Knapper
+    -   Venstre museknapp
+    -   Høyre museknapp
+    -   Scroll
 
 Festemekanismen beskrevet i kapittel 3 er en hodebøyle med disse
 spesifikasjonene:
 
-- Behagelig å bruke, også over lengre tid (viktig at det ikke er for
-  tungt).
-- Uproblematisk å ta utstyret av/på for en person som skal hjelpe
-  brukeren.
-- Tilpassningsmulighet for flere brukere uansett hodestørrelse/form.
-- Det skal være et godt press på sensorene mot kinnet, slik at det er
-  lett å bruke musen.
+-   Behagelig å bruke, også over lengre tid (viktig at det ikke er for
+    tungt).
+-   Uproblematisk å ta utstyret av/på for en person som skal hjelpe
+    brukeren.
+-   Tilpassningsmulighet for flere brukere uansett hodestørrelse/form.
+-   Det skal være et godt press på sensorene mot kinnet, slik at det
+    er lett å bruke musen.
 
 For hodebøylen er utseendemessig design nedprioritert. Av funksjoner
 er ingen valgt bort.
@@ -176,7 +179,7 @@ er ingen valgt bort.
 ===========
 
 > Tar for seg forspenningskretsen i teori og praksis. Teorien tilsier
-> at sensorene bør forspennes med en motstand på 8-15 kΩ. Målingene
+> at sensorene bør forspennes med en motstand på 8--15 kΩ. Målingene
 > viser hvordan sensorene oppfører seg under ulike omstendigheter.
 > Sensorkarakteristikken setter krav til en dynamisk verdi for
 > hendelsesaktivering, og kontinuerlig kalibrering.
@@ -214,76 +217,78 @@ trykkfølsomme området er litt mindre og er på hhv. 5 mm og 14 mm.
 > **Figur 2.3:** Forspenning av trykksensor (a), spenningsdeling (b) og brudd (c)
 
 For å få målbare trykkverdier, må sensorene *forspennes* (fig. 2.3a).
-Hver sensor kobles i serie med en motstand `R`, som går til jord. I
-den andre enden påtrykkes en tilførselsspenning `V_CC` på 3,3 V. Dette
-oppsettet gir en spenningsdeling mellom sensorresistansen, `R_S`, og
-`R`:
+Hver sensor kobles i serie med en motstand $R$, som går til jord. I
+den andre enden påtrykkes en tilførselsspenning $V_{CC}$ på 3,3 V.
+Dette oppsettet gir en spenningsdeling mellom sensorresistansen,
+$R_S$, og $R$:
 
-                     R
-    V_IN = V_CC * -------                                         (2.1)
-                  R_S + R
+$$\begin{equation}\label{eq:spenningsdeling}
+    V_{IN} = V_{CC} \cdot \frac{R}{R_S + R}
+  \end{equation}$$
 
-`V_IN` sendes inn på analog-til-digital-omformeren på kortet (ADC-en),
-og er altså verdien som programmet på mikrokontrolleren «ser». Gjennom
-ADC-en får vi en overgang fra den *fysiske* størrelsen `V_IN` til den
-*digitale* 8-bit verdien `ADC_VARIABEL` i programkoden:
+$V_{IN}$ sendes inn på analog-til-digital-omformeren på kortet
+(ADC-en), og er altså verdien som programmet på mikrokontrolleren
+«ser». Gjennom ADC-en får vi en overgang fra den *fysiske* størrelsen
+$V_{IN}$ til den *digitale* 8-bit verdien `ADC_VARIABEL` i
+programkoden:
 
-                   V_IN * 255
-    ADC_VARIABEL = ----------                                     (2.2)
-                      V_REF
+$$\begin{equation}\label{eq:datablad}
+    ADC\_VARIABEL = \frac{V_{IN} \cdot 255}{V_{REF}}
+  \end{equation}$$
 
-`V_REF` er *referansespenningen* og er lik `V_CC`. Den maksimale
+$V_{REF}$ er *referansespenningen* og er lik $V_{CC}$. Den maksimale
 verdien for `ADC_VARIABEL`, 255, svarer dermed til 3,3 V, og
-`ADC_VARIABEL` er proporsjonal med `V_IN`.
+`ADC_VARIABEL` er proporsjonal med $V_{IN}$.
 
-For å velge en passende verdi for forspenningsmotstanden `R`, må vi se
+For å velge en passende verdi for forspenningsmotstanden $R$, må vi se
 hvordan den påvirker forholdet mellom trykk og spenning. Dette
-forholdet kan brytes opp i to mindre: forholdet mellom trykk (`ρ`) og
-sensorresistans (`R_S`), og forholdet mellom sensorresistans (`R_S`)
-og målt spenning (`V_IN`).
+forholdet kan brytes opp i to mindre: forholdet mellom trykk ($\rho$)
+og sensorresistans ($R_S$), og forholdet mellom sensorresistans
+($R_S$) og målt spenning ($V_{IN}$).
 
-Målinger på `ρ`-`R_S`-forholdet er gitt i avsnitt 2.2, og kan i korte
-trekk oppsummeres slik: for lette trykk er `R_S` ≈ 100 kΩ, og for
-harde trykk går `R_S` ned til 20 kΩ, med sterkt avtagende stigning
-(fig. 2.10). Forholdet er altså sterkt ulineært: `R_S` er stor når `ρ`
-er liten, og `R_S` er liten når `ρ` er stor.
+Målinger på $\rho$--$R_S$-forholdet er gitt i avsnitt 2.2, og kan i
+korte trekk oppsummeres slik: for lette trykk er $R_S \approx 100$ kΩ,
+og for harde trykk går $R_S$ ned til 20 kΩ, med sterkt avtagende
+stigning (fig. 2.10). Forholdet er altså sterkt ulineært: $R_S$ er
+stor når $\rho$ er liten, og $R_S$ er liten når $\rho$ er stor.
 
-Det samme gjelder for `R_S`-`V_IN`-forholdet, gitt i ligning (2.1):
-når den ene går opp, går den andre ned. Summen av disse to «inverse»
-forholdene er at `ρ` og `V_IN` øker i takt: når trykket øker, så øker
-den målte spenningen, og når trykket minker, så minker spenningen. Når
-`ρ = 0`, så er også `V_IN = 0`, og i programkoden har `ADC_VARIABEL`
-verdien 0. Dette er det ideelle *nullnivået*, verdien når sensoren
-ikke er i bruk.
+Det samme gjelder for $R_S$--$V_{IN}$-forholdet, gitt i ligning
+$\eqref{eq:spenningsdeling}$: når den ene går opp, går den andre ned.
+Summen av disse to «inverse» forholdene er at $\rho$ og $V_{IN}$ øker
+i takt: når trykket øker, så øker den målte spenningen, og når trykket
+minker, så minker spenningen. Når $\rho = 0$, så er også $V_{IN} = 0$,
+og i programkoden har `ADC_VARIABEL` verdien 0. Dette er det ideelle
+*nullnivået*, verdien når sensoren ikke er i bruk.
 
 > ![](fig/vin.png)
 >
-> **Figur 2.4:** `V_IN` som funksjon av `R` og `R_S`, ligning (2.1)
+> **Figur 2.4:** $V_{IN}$ som funksjon av $R$ og $R_S$, ligning (2.1)
 
 Hvis 0 V er spenningen som måles for intet trykk, hva er da spenningen
-for et lett trykk (når `R_S` = 100 kΩ)? Det er viktig at denne verdien
+for et lett trykk (når $R_S = 100$ kΩ)? Det er viktig at denne verdien
 ikke er for lav, ellers vil den ikke reliabelt kunne skilles fra
-nullnivået: `V_INmin` > 0 V. Figur 2.4 viser hvordan
-forspenningsmotstanden `R` innvirker på forholdet mellom `R_S` og
-`V_IN`. Når sensoren tas i bruk, vil vi få et *sprang* på minst
-minimumsverdien, `V_INmin`, som selvfølgelig ikke bør være så lav at
-spranget ikke registreres. Men den bør heller ikke være for høy,
-ellers får vi ikke utnyttet intervallet av `V_IN`-verdier
+nullnivået: $V_{IN\,\text{min}} > 0$ V. Figur 2.4 viser hvordan
+forspenningsmotstanden $R$ innvirker på forholdet mellom $R_S$ og
+$V_{IN}$. Når sensoren tas i bruk, vil vi få et *sprang* på minst
+minimumsverdien, $V_{IN\,\text{min}}$, som selvfølgelig ikke bør være
+så lav at spranget ikke registreres. Men den bør heller ikke være for
+høy, ellers får vi ikke utnyttet intervallet av $V_{IN}$-verdier
 (verdiområdet) skikkelig.
 
-Vi ser også at sammenhengen mellom `R_S` og `V_IN` blir *mer ulineær*
-for lavere verdier av `R`. Ulinearitet er ikke nødvendigvis negativt.
-Si at vi ønsker at pekerfarten skal være konstant for lette trykk
-(`R_S` = 40-100 kΩ), men at den skal øke for harde trykk (`R_S` < 40
-kΩ). Da er det gunstig med *lav oppløsning* for «lette trykk» og *høy
-oppløsning* for «harde trykk». Det vil si at vi bruker en større del
-av intervallet av `V_IN`-verdier til å differensiere mellom de «harde
-trykkene», mens de «lette trykkene» delegeres til et snevrere utsnitt.
+Vi ser også at sammenhengen mellom $R_S$ og $V_{IN}$ blir *mer
+ulineær* for lavere verdier av $R$. Ulinearitet er ikke nødvendigvis
+negativt. Si at vi ønsker at pekerfarten skal være konstant for lette
+trykk ($R_S = \text{40--100}$ kΩ), men at den skal øke for harde trykk
+($R_S < 40$ kΩ). Da er det gunstig med *lav oppløsning* for «lette
+trykk» og *høy oppløsning* for «harde trykk». Det vil si at vi bruker
+en større del av intervallet av $V_{IN}$-verdier til å differensiere
+mellom de «harde trykkene», mens de «lette trykkene» delegeres til et
+snevrere utsnitt.
 
 Veier vi disse hensynene opp mot hverandre, ser vi at en motstand på
-8-15 kΩ kan være egnet. Dette gir `V_INmin` = 0,24-0,43 V, som svarer
-til `ADC_VARIABEL` = 19-33: godt over det ideelle nullnivået, og god
-utnyttelse av verdiområdet.
+8--15 kΩ kan være egnet. Dette gir $V_{IN\,\text{min}} =
+\text{0,24--0,43}$ V, som svarer til `ADC_VARIABEL` = 19--33: godt
+over det ideelle nullnivået, og god utnyttelse av verdiområdet.
 
 Men hvordan fungerer sensorene i praksis? Endres sensorresistansen
 over tid? Er nullnivået alltid 0 V? For å få svar på disse
@@ -302,14 +307,14 @@ målingene er gitt i tabell 2.1.
 
 > **Tabell 2.1:** Utstyrsliste
 >
->     -----------------------------------------
->     Instrument/maskin    Type/data
->     Motstand             8,2 kΩ
->     Spenningsforsyning   4,5 V
->     Vektenhet            4,35 g (kronestykke)
->     Vektarm              18 g
->     Multimeter
->     -----------------------------------------
+> |                    |                      |
+> | ------------------ | -------------------- |
+> | Instrument/maskin  | Type/data            |
+> | Motstand           | 8,2 kΩ               |
+> | Spenningsforsyning | 4,5 V                |
+> | Vektenhet          | 4,35 g (kronestykke) |
+> | Vektarm            | 18 g                 |
+> | Multimeter         |                      |
 
 For å øve et konstant trykk på sensorene, er det brukt en arm som det
 blir lagt vektenheter på, figur 2.6. Hvor på sensorens overflate
@@ -319,11 +324,11 @@ Uten vektenheter veier armen 18 g.
 
 ### 2.2.1 Motstandsverdi ved varierende trykk FSR-400
 
-Motstandsverdien til `R_S` (i kΩ) måles som direkte følge av trykk på
+Motstandsverdien til $R_S$ (i kΩ) måles som direkte følge av trykk på
 overflaten til en sensor av typen FSR-400 (liten sensor). Målingene
 foretas med 5 s mellomrom. Hensikten med denne målingen er å se
-hvordan et konstant trykk påvirker `R_S` over tid og hva som skjer når
-trykket minker. Går `R_S`-verdien tilbake til utgangspunktet, eller er
+hvordan et konstant trykk påvirker $R_S$ over tid og hva som skjer når
+trykket minker. Går $R_S$-verdien tilbake til utgangspunktet, eller er
 den endret som følge av at sensoren har vært i bruk? Dette er et
 viktig spørsmål hva nullnivået angår.
 
@@ -332,7 +337,7 @@ Måleresultatene er gitt i tabell 2.2 og figur 2.5.
 #### 2.2.1.1 Drøfting av resultatene
 
 Som man kan se av tabell 2.2 er resistansen i sensoren ved 26,7 g
-(tilstand 0) lik uendelig - sensoren leder ikke. Når trykket så øker
+(tilstand 0) lik uendelig -- sensoren leder ikke. Når trykket så øker
 til 31,05 g (tilstand 1), leder sensoren. Deretter lar man sensoren
 være i tilstand 1 i 20 s, og observerer at resistansen minker, se
 figur 2.5. Men når man nå går tilbake til tilstand 0, kan man se at
@@ -346,23 +351,21 @@ nullnivået med jevne mellomrom.
 
 > **Tabell 2.2:** Liten sensor, varierende vekt
 >
->     --------------------------------------------------------------------
->     Vektenheter [stk.]   Tillegg til arm [g]   Total vekt [g]   R_S [kΩ]
->     -------------------- --------------------- ---------------- --------
->     0                    0,00                  18,00            -
->     2                    8,70                  26,70            -
->     3                    13,05                 31,05            111
->     3                    13,05                 31,05            97
->     3                    13,05                 31,05            93
->     3                    13,05                 31,05            70
->     2                    8,70                  26,70            120
->     3                    13,05                 31,05            74
->     2                    8,70                  26,70            108
->     3                    13,05                 31,05            71
->     3                    13,05                 31,05            69
->     3                    13,05                 31,05            66
->     2                    8,70                  26,70            87
->     --------------------------------------------------------------------
+> | Vektenheter [stk.] | Tillegg til arm [g] | Total vekt [g] | $R_S$ [kΩ] |
+> | ------------------ | ------------------- | -------------- | ---------- |
+> | 0                  | 0,00                | 18,00          | --         |
+> | 2                  | 8,70                | 26,70          | --         |
+> | 3                  | 13,05               | 31,05          | 111        |
+> | 3                  | 13,05               | 31,05          | 97         |
+> | 3                  | 13,05               | 31,05          | 93         |
+> | 3                  | 13,05               | 31,05          | 70         |
+> | 2                  | 8,70                | 26,70          | 120        |
+> | 3                  | 13,05               | 31,05          | 74         |
+> | 2                  | 8,70                | 26,70          | 108        |
+> | 3                  | 13,05               | 31,05          | 71         |
+> | 3                  | 13,05               | 31,05          | 69         |
+> | 3                  | 13,05               | 31,05          | 66         |
+> | 2                  | 8,70                | 26,70          | 87         |
 
 > ![](fig/sensormalinger1.png)
 >
@@ -370,7 +373,7 @@ nullnivået med jevne mellomrom.
 
 ### 2.2.2 Spenningsverdi ved økende trykk, vektene av mellom hver måling
 
-Sensorene blir koblet opp som i figur 2.3 og spenningen over `R` blir
+Sensorene blir koblet opp som i figur 2.3 og spenningen over $R$ blir
 målt ved trykk på sensoren. Mellom hver måling tas vektene av, og
 trykket blir 18 g.\* Målingene foretas 5 s etter at vekten er lagt på.
 Spenningen som måles er spenningen ADC-en på kortet ser, så hensikten
@@ -382,15 +385,11 @@ er å måle hvordan spenningen stiger ved enkelttrykk.
 
 For målingene gjelder ligning (2.1), samt sammenhengene
 
-          V_CC - V_R
-    R_S = ----------                                              (2.3)
-              I_R
+$$\begin{aligned}
+  R_S &= \frac{V_{CC} - V_R}{I_R}\label{eq:resistans}\\
+  I_R &= \frac{U_R}{R}\label{eq:strom}\end{aligned}$$
 
-          U_R
-    I_R = ---                                                     (2.4)
-           R
-
-Målingene er foretatt med `V_CC` = 4,5 V og `R` = 8,2 kΩ. Valget av
+Målingene er foretatt med $V_{CC} = 4,5$ V og $R = 8,2$ kΩ. Valget av
 verdier er basert på utstyret som var tilgjengelig da målingene ble
 foretatt.
 
@@ -426,49 +425,45 @@ kontaktpunktet har en unøyaktighet på ±1 mm når vektene tas av.
 
 > **Tabell 2.3:** Liten sensor, økende vekt, vektene av mellom hver måling
 >
->     -----------------------------------------------------------------------
->     V_R [V]   Vekt [g]   Vektenheter [stk.]   Utr. I_R [µA]   Utr. R_S [kΩ]
->     --------- ---------- -------------------- --------------- -------------
->     0,20      18,00      0                    24,39           176,30
->     0,38      22,35      1                    46,34           88,91
->     0,72      26,70      2                    87,80           43,05
->     1,02      31,05      3                    124,39          27,98
->     1,13      35,40      4                    137,80          24,45
->     1,28      39,75      5                    156,10          20,63
->     1,29      44,10      6                    157,32          20,40
->     1,56      48,45      7                    190,24          15,45
->     1,60      52,80      8                    195,12          14,86
->     1,70      57,15      9                    207,32          13,51
->     1,67      61,50      10                   203,66          13,90
->     1,75      65,85      11                   213,41          12,89
->     1,90      70,20      12                   231,71          11,22
->     1,96      74,55      13                   239,02          10,63
->     2,01      78,90      14                   245,12          10,16
->     2,07      83,25      15                   252,44          9,63
->     2,12      87,60      16                   258,54          9,21
->     2,18      91,95      17                   265,85          8,73
->     2,20      96,30      18                   268,29          8,57
->     -----------------------------------------------------------------------
+> | $V_R$ [V] | Vekt [g] | Vektenheter [stk.] | Utr. $I_R$ [µA] | Utr. $R_S$ [kΩ] |
+> | --------- | -------- | ------------------ | --------------- | --------------- |
+> | 0,20      | 18,00    | 0                  | 24,39           | 176,30          |
+> | 0,38      | 22,35    | 1                  | 46,34           | 88,91           |
+> | 0,72      | 26,70    | 2                  | 87,80           | 43,05           |
+> | 1,02      | 31,05    | 3                  | 124,39          | 27,98           |
+> | 1,13      | 35,40    | 4                  | 137,80          | 24,45           |
+> | 1,28      | 39,75    | 5                  | 156,10          | 20,63           |
+> | 1,29      | 44,10    | 6                  | 157,32          | 20,40           |
+> | 1,56      | 48,45    | 7                  | 190,24          | 15,45           |
+> | 1,60      | 52,80    | 8                  | 195,12          | 14,86           |
+> | 1,70      | 57,15    | 9                  | 207,32          | 13,51           |
+> | 1,67      | 61,50    | 10                 | 203,66          | 13,90           |
+> | 1,75      | 65,85    | 11                 | 213,41          | 12,89           |
+> | 1,90      | 70,20    | 12                 | 231,71          | 11,22           |
+> | 1,96      | 74,55    | 13                 | 239,02          | 10,63           |
+> | 2,01      | 78,90    | 14                 | 245,12          | 10,16           |
+> | 2,07      | 83,25    | 15                 | 252,44          | 9,63            |
+> | 2,12      | 87,60    | 16                 | 258,54          | 9,21            |
+> | 2,18      | 91,95    | 17                 | 265,85          | 8,73            |
+> | 2,20      | 96,30    | 18                 | 268,29          | 8,57            |
 
 > **Tabell 2.4:** Stor sensor, økende vekt, vektene av mellom hver måling
 >
->     -----------------------------------------------------------------------
->     V_R [V]   Vekt [g]   Vektenheter [stk.]   Utr. I_R [µA]   Utr. R_S [kΩ]
->     --------- ---------- -------------------- --------------- -------------
->     0,27      18,00      0                    32,93           128,47
->     0,63      22,35      1                    76,83           50,37
->     0,96      26,70      2                    117,07          30,24
->     1,25      31,05      3                    152,44          21,32
->     1,35      35,40      4                    164,63          19,13
->     1,54      39,75      5                    187,80          15,76
->     1,65      44,10      6                    201,22          14,16
->     1,65      48,45      7                    201,22          14,16
->     1,67      52,80      8                    203,66          13,90
->     1,80      57,15      9                    219,51          12,30
->     1,90      61,50      10                   231,71          11,22
->     1,94      65,85      11                   236,59          10,82
->     2,08      70,20      12                   253,66          9,54
->     -----------------------------------------------------------------------
+> | $V_R$ [V] | Vekt [g] | Vektenheter [stk.] | Utr. $I_R$ [µA] | Utr. $R_S$ [kΩ] |
+> | --------- | -------- | ------------------ | --------------- | --------------- |
+> | 0,27      | 18,00    | 0                  | 32,93           | 128,47          |
+> | 0,63      | 22,35    | 1                  | 76,83           | 50,37           |
+> | 0,96      | 26,70    | 2                  | 117,07          | 30,24           |
+> | 1,25      | 31,05    | 3                  | 152,44          | 21,32           |
+> | 1,35      | 35,40    | 4                  | 164,63          | 19,13           |
+> | 1,54      | 39,75    | 5                  | 187,80          | 15,76           |
+> | 1,65      | 44,10    | 6                  | 201,22          | 14,16           |
+> | 1,65      | 48,45    | 7                  | 201,22          | 14,16           |
+> | 1,67      | 52,80    | 8                  | 203,66          | 13,90           |
+> | 1,80      | 57,15    | 9                  | 219,51          | 12,30           |
+> | 1,90      | 61,50    | 10                 | 231,71          | 11,22           |
+> | 1,94      | 65,85    | 11                 | 236,59          | 10,82           |
+> | 2,08      | 70,20    | 12                 | 253,66          | 9,54            |
 
 > ![](fig/sensormalinger2.png)
 >
@@ -493,7 +488,7 @@ kontaktpunktet har en unøyaktighet på ±1 mm når vektene tas av.
 
 ### 2.2.3 Spenningsverdi ved økende trykk, vektene ikke av
 
-Som tidligere i avsnitt 2.2.2 måles spenningen over `R`, men vektene
+Som tidligere i avsnitt 2.2.2 måles spenningen over $R$, men vektene
 blir nå *ikke* tatt av mellom hver måling. Dette er for å minske
 muligheten for bevegelse på armen, og for å vise forventet
 spenning/spenningsendring i tilfelle konstant trykk på sensoren. Her
@@ -508,42 +503,40 @@ resultatene for stor sensor er gitt i tabell 2.6 og figur 2.11.
 Ved å sammenligne figurene 2.8 og 2.10 (for liten sensor) og 2.9 og
 2.11 (for stor sensor), kan man se at de er ganske like. Den første
 avlesningen gir imidlertid en mye høyere spenning enn tidligere: Det
-er nå en differanse på ca. 0,25-0,50 V. Denne differansen synker til
-ca. 0,00-0,15 V ved 70,20 g. Følgen er en lavere stigning enn for
+er nå en differanse på ca. 0,25--0,50 V. Denne differansen synker til
+ca. 0,00--0,15 V ved 70,20 g. Følgen er en lavere stigning enn for
 enkelttrykkene.
 
 Dette understreker viktigheten av kontinuerlig kalibrering av
 nullnivået. Det de avleste sensorverdiene blir sammenlignet med for å
-fastslå om de er i bruk, kan ikke være en konstant - ellers vil man
+fastslå om de er i bruk, kan ikke være en konstant -- ellers vil man
 kunne få hendelsesaktivering som følge av at hodebøylen presser mot
 kinnet. Sensorene setter krav til en *dynamisk verdi* for
 hendelsesaktivering.
 
 > **Tabell 2.5:** Liten sensor, økende vekt, vektene ikke av mellom målingene
 >
->     -----------------------------------------------------------------------
->     V_R [V]   Vekt [g]   Vektenheter [stk.]   Utr. I_R [µA]   Utr. R_S [kΩ]
->     --------- ---------- -------------------- --------------- -------------
->     0,66      18,00      0                    80,49           47,71
->     0,79      22,35      1                    96,34           38,51
->     0,94      26,70      2                    114,63          31,06
->     1,14      31,05      3                    139,02          24,17
->     1,30      35,40      4                    158,54          20,18
->     1,50      39,75      5                    182,93          16,40
->     1,62      44,10      6                    197,56          14,58
->     1,71      48,45      7                    208,54          13,38
->     1,79      52,80      8                    218,29          12,41
->     1,89      57,15      9                    230,49          11,32
->     1,96      61,50      10                   239,02          10,63
->     2,03      65,85      11                   247,56          9,98
->     2,07      70,20      12                   252,44          9,63
->     2,10      74,55      13                   256,10          9,37
->     2,14      78,90      14                   260,98          9,04
->     2,17      83,25      15                   264,63          8,80
->     2,20      87,60      16                   268,29          8,57
->     2,23      91,95      17                   271,95          8,35
->     2,25      96,30      18                   274,39          8,20
->     -----------------------------------------------------------------------
+> | $V_R$ [V] | Vekt [g] | Vektenheter [stk.] | Utr. $I_R$ [µA] | Utr. $R_S$ [kΩ] |
+> | --------- | -------- | ------------------ | --------------- | --------------- |
+> | 0,66      | 18,00    | 0                  | 80,49           | 47,71           |
+> | 0,79      | 22,35    | 1                  | 96,34           | 38,51           |
+> | 0,94      | 26,70    | 2                  | 114,63          | 31,06           |
+> | 1,14      | 31,05    | 3                  | 139,02          | 24,17           |
+> | 1,30      | 35,40    | 4                  | 158,54          | 20,18           |
+> | 1,50      | 39,75    | 5                  | 182,93          | 16,40           |
+> | 1,62      | 44,10    | 6                  | 197,56          | 14,58           |
+> | 1,71      | 48,45    | 7                  | 208,54          | 13,38           |
+> | 1,79      | 52,80    | 8                  | 218,29          | 12,41           |
+> | 1,89      | 57,15    | 9                  | 230,49          | 11,32           |
+> | 1,96      | 61,50    | 10                 | 239,02          | 10,63           |
+> | 2,03      | 65,85    | 11                 | 247,56          | 9,98            |
+> | 2,07      | 70,20    | 12                 | 252,44          | 9,63            |
+> | 2,10      | 74,55    | 13                 | 256,10          | 9,37            |
+> | 2,14      | 78,90    | 14                 | 260,98          | 9,04            |
+> | 2,17      | 83,25    | 15                 | 264,63          | 8,80            |
+> | 2,20      | 87,60    | 16                 | 268,29          | 8,57            |
+> | 2,23      | 91,95    | 17                 | 271,95          | 8,35            |
+> | 2,25      | 96,30    | 18                 | 274,39          | 8,20            |
 
 > ![](fig/sensormalinger6.png)
 >
@@ -558,29 +551,27 @@ hendelsesaktivering.
 
 > **Tabell 2.6:** Stor sensor, økende vekt, vektene ikke av mellom målingene
 >
->     -----------------------------------------------------------------------
->     V_R [V]   Vekt [g]   Vektenheter [stk.]   Utr. I_R [µA]   Utr. R_S [kΩ]
->     --------- ---------- -------------------- --------------- -------------
->     0,48      18,00      0                    58,54           68,68
->     0,73      22,35      1                    89,02           42,35
->     1,10      26,70      2                    134,15          25,35
->     1,28      31,05      3                    156,10          20,63
->     1,42      35,40      4                    173,17          17,79
->     1,50      39,75      5                    182,93          16,40
->     1,63      44,10      6                    198,78          14,44
->     1,71      48,45      7                    208,54          13,38
->     1,80      52,80      8                    219,51          12,30
->     1,89      57,15      9                    230,49          11,32
->     1,97      61,50      10                   240,24          10,53
->     2,08      65,85      11                   253,66          9,54
->     2,15      70,20      12                   262,20          8,96
->     2,22      74,55      13                   270,73          8,42
->     2,27      78,90      14                   276,83          8,06
->     2,32      83,25      15                   282,93          7,71
->     2,35      87,60      16                   286,59          7,50
->     2,39      91,95      17                   291,46          7,24
->     2,42      96,30      18                   295,12          7,05
->     -----------------------------------------------------------------------
+> | $V_R$ [V] | Vekt [g] | Vektenheter [stk.] | Utr. $I_R$ [µA] | Utr. $R_S$ [kΩ] |
+> | --------- | -------- | ------------------ | --------------- | --------------- |
+> | 0,48      | 18,00    | 0                  | 58,54           | 68,68           |
+> | 0,73      | 22,35    | 1                  | 89,02           | 42,35           |
+> | 1,10      | 26,70    | 2                  | 134,15          | 25,35           |
+> | 1,28      | 31,05    | 3                  | 156,10          | 20,63           |
+> | 1,42      | 35,40    | 4                  | 173,17          | 17,79           |
+> | 1,50      | 39,75    | 5                  | 182,93          | 16,40           |
+> | 1,63      | 44,10    | 6                  | 198,78          | 14,44           |
+> | 1,71      | 48,45    | 7                  | 208,54          | 13,38           |
+> | 1,80      | 52,80    | 8                  | 219,51          | 12,30           |
+> | 1,89      | 57,15    | 9                  | 230,49          | 11,32           |
+> | 1,97      | 61,50    | 10                 | 240,24          | 10,53           |
+> | 2,08      | 65,85    | 11                 | 253,66          | 9,54            |
+> | 2,15      | 70,20    | 12                 | 262,20          | 8,96            |
+> | 2,22      | 74,55    | 13                 | 270,73          | 8,42            |
+> | 2,27      | 78,90    | 14                 | 276,83          | 8,06            |
+> | 2,32      | 83,25    | 15                 | 282,93          | 7,71            |
+> | 2,35      | 87,60    | 16                 | 286,59          | 7,50            |
+> | 2,39      | 91,95    | 17                 | 291,46          | 7,24            |
+> | 2,42      | 96,30    | 18                 | 295,12          | 7,05            |
 
 > ![](fig/sensormalinger8.png)
 >
@@ -688,10 +679,10 @@ metallplatene.
 
 Det som nå ble vurdert, var om kretskortet som inneholder
 mikroprosessoren, skulle plasseres på hodebøylen. Siden det i
-utgangspunktet skulle være minst mulig på hodebøylen - både fordi at
+utgangspunktet skulle være minst mulig på hodebøylen -- både fordi at
 det skulle være så lett som mulig, og at det ikke skulle bli mye
 elektronikk som en må ta hensyn til når en skal plassere hodebøylen på
-brukeren - måtte det finnes et annet alternativ. Det ble anskaffet en
+brukeren -- måtte det finnes et annet alternativ. Det ble anskaffet en
 større kabel med flere ledere i som ble festet på toppen av hodebøylen
 og koblet til sensorene på hver sin side, slik at alle signalene fra
 sensorene blir sendt samlet gjennom en kabel til prosessoren som skal
@@ -805,7 +796,7 @@ Kretsen skal ikke sette krav til brukerens tekniske kunnskaper.
 Kretsen må kunne lese analoge data og digitalisere den å sende den
 videre (analog-til-digital-omformer, ADC). Den skal også være den
 billigste mulige løsningen som kan tilfredsstille alle
-spesifikasjonene på side sec:produktspes.
+spesifikasjonene.
 
 5.2 Valg av krets
 -----------------
@@ -845,7 +836,7 @@ Bluetooth/USB-grensesnitt mot PC for bruker, og et
 programmeringsgrensesnitt for utvikling. Denne kretsen ville også
 blitt bygd rundt en mikrokontroller fra Atmel, grunnet faglig
 kompetanse hos HiST. Mer om hva som kan gjøres videre er gitt i
-kapittel 10 - design av kretsen(e) er utenfor prosjektgruppens
+kapittel 10 -- design av kretsen(e) er utenfor prosjektgruppens
 hovedproblemstilling.
 
 5.3 Strømforsyning
@@ -860,11 +851,9 @@ kretsen blir billigere og mindre komplisert. Spenningen blir gjort om
 til ca. 3,3 V ved hjelp av en lineær CMOS-spenningsregulator. Den
 nøyaktige utspenningen fra denne kan beregnes fra formelen
 
-                   /     R_15 + R_18 \
-    V_CC3 = 1,25 * | 1 + ----------- |                            (5.1)
-                   \         R_19    /
+$$V_{CC3} = 1,25 \cdot \left(1 + \frac{R_{15}+R_{18}}{R_{19}}\right)$$
 
-Dette gir en utspenning på `V_CC3` = 3,266 V. Denne spenningen blir
+Dette gir en utspenning på $V_{CC3} = 3,266$ V. Denne spenningen blir
 også benyttet av sensorene som er koblet til.
 
 > ![](fig/power.png)
@@ -917,7 +906,7 @@ sensorer og plassering.
 Det må også tas stilling til hvordan hver enkelt sensor avleses.
 Avleste verdier må nødvendigvis sammenlignes med et *nullnivå* for å
 avgjøre om de er i bruk. Målingene i kapittel 2 tilsier at dette
-nullnivået bør oppdateres med jevne mellomrom - mikrokontrolleren bør
+nullnivået bør oppdateres med jevne mellomrom -- mikrokontrolleren bør
 ta høyde for at sensorene kan henge seg opp, og kalibrere deretter.
 
 6.2 Plassering av sensorene
@@ -968,13 +957,13 @@ tilnærming*.
 Den første tilnærmingen anvender fire *små* sensorer (type FSR-400)
 for bevegelse på venstre kinn og to *store* sensorer (type FSR-402)
 for knapper på høyre kinn (fig. 6.2). Bevegelsessensorene er plassert
-i «stjerne» og svarer til himmelretningene på et kompass - ved å
+i «stjerne» og svarer til himmelretningene på et kompass -- ved å
 presse på den øverste sensoren, går pekeren oppover, osv. Når trykket
 forsvinner, slutter bevegelsen.
 
 > ![](fig/retninger.png)
 >
-> **Figur 6.3:** Retninger i intervallet 0-90°.
+> **Figur 6.3:** Retninger i intervallet 0--90°.
 > Tallene på aksene ganges med basishastigheten.
 
 Diagonal bevegelse fås ved å trykke på to nærliggende sensorer
@@ -1002,15 +991,17 @@ venstre museknapp inne mens pekeren beveges.
 
 Hver sensor er forspent og koblet til en egen
 analog-til-digital-omformer (ADC) som beskrevet i kapittel 2. ADC-ene
-avleses kontinuerlig - opptil 125 ganger i sekundet - og verdiene
+avleses kontinuerlig -- opptil 125 ganger i sekundet -- og verdiene
 analyseres for å fastslå om en sensor er i bruk.
 
 For å finne ut om en sensor er aktiv, må den avleste verdien
 sammenlignes med en verdi for når sensoren *ikke* er i bruk,
 nullnivået. Hvis den avleste verdien er større enn nullnivået med en
-viss margin - *spranget* - er sensoren aktiv:
+viss margin -- *spranget* -- er sensoren aktiv:
 
-    avlest verdi > nullnivå + sprang                              (6.1)
+$$\begin{equation}\label{eq:sprang}
+  \text{avlest verdi} > \text{nullnivå} + \text{sprang}
+  \end{equation}$$
 
 Når dette er oppfylt, sier vi at vi «har et sprang». Marginen er
 fastsatt på forhånd, og er litt større for de store sensorene på
@@ -1050,7 +1041,7 @@ ved å aktivere en sensor på motsatt kinn. Hvis begge kinnene er
 Programmet lagrer de siste avleste verdiene til de seks sensorene i én
 tabell, og de seks nullnivåene, som disse sammenlignes med, i en
 annen. Det går så igjennom tabellene parvis og sjekker dem opp mot
-ligning (6.1) - på leting etter en aktiv sensor.
+ligning (6.1) -- på leting etter en aktiv sensor.
 
 > ![](fig/sensortabenkel.png)
 >
@@ -1223,8 +1214,8 @@ tålmodighet og innsats.
 7 Testing med tungen
 ====================
 
-> Inneholder en grundig test - med resultater - av funksjonaliteten og
-> brukervennlighet til de to tilnærmingene i kapittel 6. Viser at
+> Inneholder en grundig test -- med resultater -- av funksjonaliteten
+> og brukervennlighet til de to tilnærmingene i kapittel 6. Viser at
 > andre tilnærming er en god forbedring av den første. Videre drøfting
 > er gitt i forrige kapittel, avsnitt 6.3.3 og 6.4.4.
 
@@ -1242,24 +1233,24 @@ plassering av sensorene på sensorplatene.
 Når man skal bruke en datamus, har man enkelte krav. Den skal være
 lett å styre, og den skal være nøyaktig. En økt frran datamaskinen tar
 gjerne litt tid, så hvor lenge kan man sitte før tungen blir sliten?
-Hvor god følelse av kontroll oppnår brukeren - oppleves frustrasjon
+Hvor god følelse av kontroll oppnår brukeren -- oppleves frustrasjon
 over datamusen under bruk? For å kunne teste dette, er det laget noen
 enkle tester med stigende vanskelighetsgrad.
 
 **Metode:**
 
-1. **Åpne en snarvei fra skrivebordet:** velg en snarvei, før
-   musepekeren over den og dobbeltklikk/åpne.
-2. **Åpne en snarvei fra startmenyen:** åpne «Start»-menyen og
-   «Programmer». Åpne nå en forhåndsbestemt snarvei fra denne menyen.
-3. **Bruke nettleseren:** Åpne Mozilla, gå til en avisside fra
-   «Favoritter» eller hurtigmeny (f.eks. <http://www.vg.no/>), bla ned
-   på siden og åpne en artikkel.
-4. **Bruk over tid:** åpne Microsoft Paint og prøv å tegne en kopi av
-   figur 7.1a. Etter 15 minutter avsluttes testen, og resultatet
-   sammenlignes med originalen. Er resultatet bra, og er tungen
-   sliten? Utfør testen to ganger for å se om det er en liten
-   tilvenningskurve fra brukersiden.
+1.  **Åpne en snarvei fra skrivebordet:** velg en snarvei, før
+    musepekeren over den og dobbeltklikk/åpne.
+2.  **Åpne en snarvei fra startmenyen:** åpne «Start»-menyen og
+    «Programmer». Åpne nå en forhåndsbestemt snarvei fra denne menyen.
+3.  **Bruke nettleseren:** Åpne Mozilla, gå til en avisside fra
+    «Favoritter» eller hurtigmeny (f.eks. <http://www.vg.no/>), bla ned
+    på siden og åpne en artikkel.
+4.  **Bruk over tid:** åpne Microsoft Paint og prøv å tegne en kopi av
+    figur 7.1a. Etter 15 minutter avsluttes testen, og resultatet
+    sammenlignes med originalen. Er resultatet bra, og er tungen
+    sliten? Utfør testen to ganger for å se om det er en liten
+    tilvenningskurve fra brukersiden.
 
 Testen er utført med hodebøylen, men testeren har lagt ekstra trykk
 bak sensorplatene med hendene. Med en bedre hodebøyle vil dette være
@@ -1276,28 +1267,28 @@ unødvendig (se kapittel 10).
 
 Se avsnitt 6.3 for detaljer om første tilnærming.
 
-1. **Åpne en snarvei fra skrivebordet:** Musepekeren danser litt over
-   skjermen, men med litt godvilje blir pekeren plassert over den
-   forhåndsvalgte snarveien (Papirkurven). Musebevegelsen går litt for
-   fort, noe som gjør det vanskelig å treffe ikonet. Det føles også
-   litt tungt å holde sensoren inne for å bevege pekeren over
-   skjermen. Holder venstre muspeker inne for å dobbeltklikke.
-2. **Åpne en snarvei fra startmenyen:** Merker at det krever mer
-   presisjon og konsentrasjon å gå inn i «Programmer»-menyen.
-   Musepekeren beveger seg litt for fort, noe som fører til at
-   «Start»-meny-grenen til tider lukker seg. Det kommer frem at musen
-   trenger en ny måte å prioritere mellom sensoren(e) som er i bruk
-   på. Det hender musepekeren bytter retning uten at man vil det, og
-   dette føltes ikke behagelig.
-3. **Bruke nettleseren:** Velger å åpne nettsiden fra hurtigmenyen,
-   blar nedover ved å trykke nederst på rullefeltet. Det er noe
-   vanskelig å treffe det, savner en scrollfunksjon. Følelsen av
-   kontroll over bevegelsen er også her litt dårlig, men knappene
-   (høyre/venstre) er lette å bruke. Litt tungt å bevege musepekeren
-   rundt på skjermen.
-4. **Bruk over tid:** Ga opp etter syv minutter. Ble utrolig hemmet av
-   at pekeren beveget seg for fort, og ble veldig sliten. Resultatet
-   er gitt i figur 7.1b.
+1.  **Åpne en snarvei fra skrivebordet:** Musepekeren danser litt over
+    skjermen, men med litt godvilje blir pekeren plassert over den
+    forhåndsvalgte snarveien (Papirkurven). Musebevegelsen går litt for
+    fort, noe som gjør det vanskelig å treffe ikonet. Det føles også
+    litt tungt å holde sensoren inne for å bevege pekeren over
+    skjermen. Holder venstre muspeker inne for å dobbeltklikke.
+2.  **Åpne en snarvei fra startmenyen:** Merker at det krever mer
+    presisjon og konsentrasjon å gå inn i «Programmer»-menyen.
+    Musepekeren beveger seg litt for fort, noe som fører til at
+    «Start»-meny-grenen til tider lukker seg. Det kommer frem at musen
+    trenger en ny måte å prioritere mellom sensoren(e) som er i bruk
+    på. Det hender musepekeren bytter retning uten at man vil det, og
+    dette føltes ikke behagelig.
+3.  **Bruke nettleseren:** Velger å åpne nettsiden fra hurtigmenyen,
+    blar nedover ved å trykke nederst på rullefeltet. Det er noe
+    vanskelig å treffe det, savner en scrollfunksjon. Følelsen av
+    kontroll over bevegelsen er også her litt dårlig, men knappene
+    (høyre/venstre) er lette å bruke. Litt tungt å bevege musepekeren
+    rundt på skjermen.
+4.  **Bruk over tid:** Ga opp etter syv minutter. Ble utrolig hemmet av
+    at pekeren beveget seg for fort, og ble veldig sliten. Resultatet
+    er gitt i figur 7.1b.
 
 For drøfting av resultatene, se avsnitt 6.3.3.
 
@@ -1314,19 +1305,19 @@ For drøfting av resultatene, se avsnitt 6.3.3.
 
 Se avsnitt 6.4 for detaljer om andre tilnærming.
 
-1. **Åpne en snarvei fra skrivebordet:** Litt vansker med å treffe
-   rett sensor gjør at pekeren til tider beveger seg feil vei. Trykker
-   to ganger på venstre musetast for å åpne den forhåndsvalgte
-   snarveien.
-2. **Åpne en snarvei fra startmenyen:** Bruker
-   «ett-trykk-funksjonaliteten» for å bevege pekeren. Ingen problemer.
-3. **Bruke nettleseren:** Glimrende. Gjorde speielt mye bruk av
-   «ett-trykk-funksjonaliteten» og scrollfunksjonen, svært behagelig i
-   bruk.
-4. **Bruk over tid:** Den delen av tegningen som krever høyest
-   presisjon, blomsten med blad og den dråpeformede figuren, er litt
-   vanskelig. Men av fremskrittet fra figur 7.2b til figur 7.2c ser
-   man at dette kan bli meget bra med litt øvelse.
+1.  **Åpne en snarvei fra skrivebordet:** Litt vansker med å treffe
+    rett sensor gjør at pekeren til tider beveger seg feil vei. Trykker
+    to ganger på venstre musetast for å åpne den forhåndsvalgte
+    snarveien.
+2.  **Åpne en snarvei fra startmenyen:** Bruker
+    «ett-trykk-funksjonaliteten» for å bevege pekeren. Ingen problemer.
+3.  **Bruke nettleseren:** Glimrende. Gjorde speielt mye bruk av
+    «ett-trykk-funksjonaliteten» og scrollfunksjonen, svært behagelig i
+    bruk.
+4.  **Bruk over tid:** Den delen av tegningen som krever høyest
+    presisjon, blomsten med blad og den dråpeformede figuren, er litt
+    vanskelig. Men av fremskrittet fra figur 7.2b til figur 7.2c ser
+    man at dette kan bli meget bra med litt øvelse.
 
 For drøfting av resultatene, se avsnitt 6.4.4.
 
@@ -1358,37 +1349,34 @@ utvikles videre (se kapittel 10).
 
 > **Tabell 8.1:** Materialkostnader uten frakt
 >
->     --------------------------------------------------------------------------------------------------------------------------------------
->     Produktnavn           Produsent                   Type                        Antall   Enhetspris   Total pris   Firma
->                                                                                            [NOK]        [NOK]
->     --------------------- --------------------------- --------------------------- -------- ------------ ------------ ---------------------
->     AT90USBKey            Atmel                       Demokrets*                  2        229          458          Mouser electronics
->     FSR-400               Interlink                   Trykkfølsom resistans*      25       23           575          Interlink Electronics
->     FSR-402               Interlink                   Trykkfølsom resistans*      25       26           650          Interlink Electronics
->     Veroboard                                         Koblingsbrett               1        59           59           Clas Ohlson
->     Teip                                              Gaffateip                   1        79           79           Clas Ohlson
->     Metall 1                                          Stakepinne                  7,6 m    39           39           Jula
->     Metall 2                                          Spikerbånd 20 × 1 mm        10 m     89           89           Clas Ohlson
->                                                       Koblingsenheter**           1        -            -            HiST
->     --------------------------------------------------------------------------------------------------------------------------------------
->                                                       Forslag til løskomponenter
->     --------------------------------------------------------------------------------------------------------------------------------------
->     AT90USB1287           Atmel                       Mikrokontroller             1        87           87           Mouser electronics
->     AT90USB1287                                                                   25       68           1700
->     AT90USB1287                                                                   100      61,182       6118
->     LP3982IMM-ADJ         National Semiconductor      Spenningsregulator          10       14,65        146,5        Arrow Electronics
->     LP3982IMM-ADJ                                                                 100      5,15         515
->     LP3982IMM-ADJ                                                                 1000     4,25         4250
->     774-MXO45HS-3C-8.0    CTS Electronic Components   Crystal Oscillators 8 MHz   1        19,50        19,50        Mouser electronics
->     774-MXO45HS-3C-8.0                                                            100      15,24        1524
->     774-MXO45HS-3C-8. 0                                                           1000     9,966        9996
->     500075-1517           Molex                       USB Mini-B vert             1        51           51           Mouser electronics
->     500075-1517                                                                   100      29,43        2943
->     500075-1517                                                                   1000     24,09        24090
->     Motstander                                        Laveffektmotstander*        1000     0,0594       59,4
->     Kretskort                                         To-lags PCB*                100      21,4         2140 + 278   Microcirtec
->     Kretskort                                                                     1000     3,219        3219 + 730
->     --------------------------------------------------------------------------------------------------------------------------------------
+> | Produktnavn         | Produsent                 | Type                       | Antall | Enhetspris [NOK] | Total pris [NOK] | Firma                 |
+> | ------------------- | --------------------------| -------------------------- | ------ | ----------       | ----------       | --------------------- |
+> | AT90USBKey          | Atmel                     | Demokrets*                 | 2      | 229              | 458              | Mouser electronics    |
+> | FSR-400             | Interlink                 | Trykkfølsom resistans*     | 25     | 23               | 575              | Interlink Electronics |
+> | FSR-402             | Interlink                 | Trykkfølsom resistans*     | 25     | 26               | 650              | Interlink Electronics |
+> | Veroboard           |                           | Koblingsbrett              | 1      | 59               | 59               | Clas Ohlson           |
+> | Teip                |                           | Gaffateip                  | 1      | 79               | 79               | Clas Ohlson           |
+> | Metall 1            |                           | Stakepinne                 | 7,6 m  | 39               | 39               | Jula                  |
+> | Metall 2            |                           | Spikerbånd 20 × 1 mm       | 10 m   | 89               | 89               | Clas Ohlson           |
+> |                     |                           | Koblingsenheter**          | 1      | --               | --               | HiST                  |
+> |                     |                           |                            |        |                  |                  |                       |
+> |                     |                           | Forslag til løskomponenter |        |                  |                  |                       |
+> |                     |                           |                            |        |                  |                  |                       |
+> | AT90USB1287         | Atmel                     | Mikrokontroller            | 1      | 87               | 87               | Mouser electronics    |
+> | AT90USB1287         |                           |                            | 25     | 68               | 1700             |                       |
+> | AT90USB1287         |                           |                            | 100    | 61,182           | 6118             |                       |
+> | LP3982IMM-ADJ       | National Semiconductor    | Spenningsregulator         | 10     | 14,65            | 146,5            | Arrow Electronics     |
+> | LP3982IMM-ADJ       |                           |                            | 100    | 5,15             | 515              |                       |
+> | LP3982IMM-ADJ       |                           |                            | 1000   | 4,25             | 4250             |                       |
+> | 774-MXO45HS-3C-8.0  | CTS Electronic Components | Crystal Oscillators 8 MHz  | 1      | 19,50            | 19,50            | Mouser electronics    |
+> | 774-MXO45HS-3C-8.0  |                           |                            | 100    | 15,24            | 1524             |                       |
+> | 774-MXO45HS-3C-8. 0 |                           |                            | 1000   | 9,966            | 9996             |                       |
+> | 500075-1517         | Molex                     | USB Mini-B vert            | 1      | 51               | 51               | Mouser electronics    |
+> | 500075-1517         |                           |                            | 100    | 29,43            | 2943             |                       |
+> | 500075-1517         |                           |                            | 1000   | 24,09            | 24090            |                       |
+> | Motstander          |                           | Laveffektmotstander*       | 1000   | 0,0594           | 59,4             |                       |
+> | Kretskort           |                           | To-lags PCB*               | 100    | 21,4             | 2140 + 278       | Microcirtec           |
+> | Kretskort           |                           |                            | 1000   | 3,219            | 3219 + 730       |                       |
 >
 > Tabellen benytter seg av omregningene € = 8,7 NOK og $ = 6,6 NOK.
 
@@ -1424,7 +1412,7 @@ sensorene er i kontakt med kinnet kan forbedre dette.
 Det ble laget en hodebøyle for å gi riktig plassering av sensorene på
 kinnet. På grunn av lite bakgrunnskunskap og utstyr, oppfyller ikke
 hodebøylen alle kravene i produktspesifikasjonen. Sensorene er
-plassert utenpå kinnene - to store knappsensorer på venstre og fire
+plassert utenpå kinnene -- to store knappsensorer på venstre og fire
 små bevegelsessensorer på høyre. Prototypen har et problem med at
 sensorene ligger litt dårlig mot kinnet.
 
@@ -1504,7 +1492,7 @@ utgave kan være en god forbedring.
 Sensorplatene til prototypen består av to kretskort som sensorene er
 teipet til. Dette har vist seg lite slitesterkt, man bør finne en
 alternativ løsning. Det kan være ønskelig for den enkelte bruker å
-rotere platene 180-360°, for optimal brukervennlighet. Videre kan det
+rotere platene 180--360°, for optimal brukervennlighet. Videre kan det
 hende at en buet eller fleksibel plate kan fungere bedre som
 festepunkt til sensorene. Dette kan skape et mer nøyaktig bilde av
 hvor tungen trykker, og en bedre brukeropplevelse. Det kan være
@@ -1526,11 +1514,11 @@ mulig å bruke USB-grensesnittet.
 ### 10.2.1 Bruk av batteri som strømforsyning
 
 Den innebygde spenningskretsen på AT90USBKey gjør at den kan forsynes
-med batterispenninger mellom 8-15 V (DC). Ved normal bruk blir det
-målt at kretsen trekker mellom 7,5-10 mA med et 9 V batteri tilkoblet.
-I tilegg kommer Bluetooth-adapteren, som også får spenningsforsyningen
-fra AT90USBKey. Ved opperasjon vil denne øke forbruket med 18,3 mA,
-slik at totalforbruket blir ca. 28 mA.
+med batterispenninger mellom 8--15 V (DC). Ved normal bruk blir det
+målt at kretsen trekker mellom 7,5--10 mA med et 9 V batteri
+tilkoblet. I tilegg kommer Bluetooth-adapteren, som også får
+spenningsforsyningen fra AT90USBKey. Ved opperasjon vil denne øke
+forbruket med 18,3 mA, slik at totalforbruket blir ca. 28 mA.
 
 En oversikt over brukertid med ulike batterier tilkoblet kretsen er
 gitt i tabell 10.1. Det er også mulig å legge en funksjon inn i
@@ -1552,19 +1540,15 @@ batteriet ikke skal overlades. Uten denne ville batteriet ha blitt
 
 > **Tabell 10.1:** Teoretisk operasjonstid med ulike batterityper
 >
->     -------------------------------------------------------------------------------------
->     Batteritype          Spenning   Kapasitet   Belastningsstrøm   Operasjonstid   Vekt
->                          [V]        [mAh]       [mA]               [h]             [g]
->     -------------------- ---------- ----------- ------------------ --------------- ------
->     HR6F22 Ni-MH         8,4        200         30,0               6,7             39
->     6F22 Litium*         9,0        500         28,0               17,9            28
->     U9VLJ10 Litium*      9,0        1200        28,0               42,9            38
->     AAA Ni-MH 8x serie   8 × 1,2    1000        26,3               38,0            8 × 16
->     AA Ni-MH 8x serie    8 × 1,2    2700        26,3               102,7           8 × 30
->     -------------------------------------------------------------------------------------
+> | Batteritype        | Spenning [V] | Kapasitet [mAh] | Belastningsstrøm [mA] | Operasjonstid [h] | Vekt [g]   |
+> | ------------------ | ------------ | --------------- | --------------------- | ----------------- | ---------- |
+> | HR6F22 Ni-MH       | 8,4          | 200             | 30,0                  | 6,7               | 39         |
+> | 6F22 Litium*       | 9,0          | 500             | 28,0                  | 17,9              | 28         |
+> | U9VLJ10 Litium*    | 9,0          | 1200            | 28,0                  | 42,9              | 38         |
+> | AAA Ni-MH 8x serie | 8 × 1,2      | 1000            | 26,3                  | 38,0              | 8 × 16     |
+> | AA Ni-MH 8x serie  | 8 × 1,2      | 2700            | 26,3                  | 102,7             | 8 × 30     |
 
 > \* Tilpasset lader må anvendes for lading av litiumbatterier.
-
 
 ### 10.2.2 Bluetooth
 
@@ -1604,7 +1588,7 @@ Bibliografi
 Bilag: CD
 =========
 
-Vedlegg 1-4 foreligger på CD, organisert som følger:
+Vedlegg 1--4 foreligger på [CD](cd/), organisert som følger:
 
 Vedlegg 1: Programkode
 ----------------------
