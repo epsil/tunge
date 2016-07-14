@@ -111,45 +111,49 @@ forsøk med:
 
 -   Induktive følere (reagerer på metall og er billige i innkjøp)
 -   Touch (en form for kapasitiv føler)
--   IR (Vanskelig metode for avlesning)
+-   IR (vanskelig metode for avlesning)
 -   Kapasitive følere (svært dyre i innkjøp)
 
 Det er ønskelig at gruppen starter prosjektet fra «scratch», for å se
 om resultatet benytter seg av alternative metoder til dem som er brukt
 tidligere.
 
-1.2 Problemstilling
+1.2 Problemstilling {#sec-hovedproblemstilling}
 -------------------
 
 Ved endt prosjekt skal det legges frem en prototype som kan styre
 musepekeren i Microsoft Windows ved bruk av tungen, og som har de
 samme mulighetene som en ordinær mus. Prosjektgruppen har fått utdelt
 trykksensorer (FSR-400 og FSR-402), produsert av Interlink Electronics
-(sensorene kapittel 2). Prosjektet skal kunne svare på om sensorene
-kan brukes til et ferdig produkt. Det skal kommes frem til en
-konfigurasjon av sensorplassering, og algoritmer for behandling av
-sensordata.
+(sensorene [kapittel 2](#sec-sensorkap)). Prosjektet skal kunne svare
+på om sensorene kan brukes til et ferdig produkt. Det skal kommes frem
+til en konfigurasjon av sensorplassering, og algoritmer for behandling
+av sensordata.
 
 ### 1.2.1 Hva skal gjøres og hvordan
 
--   Kartlegge hvordan de utdelte sensorene kan brukes (kap. 2).
--   Det skal lages en hodebøyle for enkel bruk av datamusen (kap. 3).
+-   Kartlegge hvordan de utdelte sensorene kan brukes
+    ([kap. 2](#sec-sensorkap)).
+-   Det skal lages en hodebøyle for enkel bruk av datamusen
+    ([kap. 3](#sec-hodeboyle)).
 -   Det skal lages en krets for signalbehandling, fortrinnsvis en
-    mikrokontroller med ADC (kap. 5).
+    mikrokontroller med ADC ([kap. 5](#sec-elektronikk)).
 -   Overføringsgrensesnitt mot Microsoft Windows -- Bluetooth/USB
-    (kap. 5).
+    ([kap. 5](#sec-elektronikk)).
 -   Det skal tas standpunkt til hvor prosesseringen av data skal
-    foregå, før eller etter signalet har kommet til datamaskinen (kap.
-    5).
+    foregå, før eller etter signalet har kommet til datamaskinen
+    ([kap. 5](#sec-elektronikk)).
 -   Valg av sensorkonfigurasjon, antall og plassering,
-    brukergrensesnitt (kap. 6).
--   Program for tolkning av avlest sensordata må skrives (kap. 6).
+    brukergrensesnitt ([kap. 6](#sec-funksjonalitet)).
+-   Program for tolkning av avlest sensordata må skrives
+    ([kap. 6](#sec-funksjonalitet)).
 
-### 1.2.2 Overordnet spesifikasjon av konseptet
+### 1.2.2 Overordnet spesifikasjon av konseptet {#sec-produktspes}
 
-Bruken av funksjonene er beskrevet i kapittel 6, som tar for seg
-funksjonalitet og brukergrensesnitt. Konseptet skal inneholde disse
-standard musefunksjonene:
+Bruken av funksjonene er beskrevet i
+[kapittel 6](#sec-funksjonalitet), som tar for seg funksjonalitet og
+brukergrensesnitt. Konseptet skal inneholde disse standard
+musefunksjonene:
 
 -   Bevegelse
     -   Horisontal
@@ -161,8 +165,8 @@ standard musefunksjonene:
     -   Høyre museknapp
     -   Scroll
 
-Festemekanismen beskrevet i kapittel 3 er en hodebøyle med disse
-spesifikasjonene:
+Festemekanismen beskrevet i [kapittel 3](#sec-hodeboyle) er en
+hodebøyle med disse spesifikasjonene:
 
 -   Behagelig å bruke, også over lengre tid (viktig at det ikke er for
     tungt).
@@ -175,7 +179,7 @@ spesifikasjonene:
 For hodebøylen er utseendemessig design nedprioritert. Av funksjoner
 er ingen valgt bort.
 
-2 Sensorene
+2 Sensorene {#sec-sensorkap}
 ===========
 
 > Tar for seg forspenningskretsen i teori og praksis. Teorien tilsier
@@ -187,40 +191,42 @@ er ingen valgt bort.
 2.1 Teori: forspenning av trykksensorene
 ----------------------------------------
 
-> ![](fig/trykksensor.png)
+> ![](fig/trykksensor.png) {#fig-trykksensorer}
 >
 > **Figur 2.1:** Resistive trykksensorer
 
-Sensorene som brukes, er *resistive trykksensorer* (fig. 2.1), eller
-trykkfølsomme motstander. De består av av to deler: polymerbasert
-tykkfilm koblet til et resistivt materiale, og polymerbasert tykkfilm
-koblet til elektroniske kontakter. Polymer er en type bindingsmiddel
-som brukes på motstander og ledere. Når dette presses sammen, gir det
-økt konduktivitans (lederevne) gjennom kretsen [Vedlegg 2].
+Sensorene som brukes, er *resistive trykksensorer*
+([fig. 2.1](#fig-trykksensorer)), eller trykkfølsomme motstander. De
+består av av to deler: polymerbasert tykkfilm koblet til et resistivt
+materiale, og polymerbasert tykkfilm koblet til elektroniske
+kontakter. Polymer er en type bindingsmiddel som brukes på motstander
+og ledere. Når dette presses sammen, gir det økt konduktivitans
+(lederevne) gjennom kretsen [[Vedlegg 2](#ref-interlink)].
 
 Dermed fungerer sensorene som en variabel motstand under trykk (jo
 høyere trykk, jo lavere resistans), og som et brudd (uendelig
 resistans) ellers.
 
-> ![](fig/fsrguide.png)
+> ![](fig/fsrguide.png) {#fig-sensortyper}
 >
 > **Figur 2.2:** Sensor type FSR-400 (a), sensor type FSR-402 (b).
 > Millimetermål er gitt i klammer.
 
-Sensorene, som produseres av Interlink Electronics,\* kommer i to
-typer (fig. 2.2): (a) en *liten* sensor med en diameter på 8 mm
-(FSR-400), og (b) en *stor* sensor på 18 mm (FSR-402). Det
-trykkfølsomme området er litt mindre og er på hhv. 5 mm og 14 mm.
+Sensorene, som produseres av Interlink Electronics,[^1] kommer i to
+typer ([fig. 2.2](#fig-sensortyper)): (a) en *liten* sensor med en
+diameter på 8 mm (FSR-400), og (b) en *stor* sensor på 18 mm
+(FSR-402). Det trykkfølsomme området er litt mindre og er på hhv. 5 mm
+og 14 mm.
 
-> ![](fig/sensor.png)
+> ![](fig/sensor.png) {#fig-sensor}
 >
 > **Figur 2.3:** Forspenning av trykksensor (a), spenningsdeling (b) og brudd (c)
 
-For å få målbare trykkverdier, må sensorene *forspennes* (fig. 2.3a).
-Hver sensor kobles i serie med en motstand $R$, som går til jord. I
-den andre enden påtrykkes en tilførselsspenning $V_{CC}$ på 3,3 V.
-Dette oppsettet gir en spenningsdeling mellom sensorresistansen,
-$R_S$, og $R$:
+For å få målbare trykkverdier, må sensorene *forspennes*
+([fig. 2.3a](#fig-sensor)). Hver sensor kobles i serie med en motstand
+$R$, som går til jord. I den andre enden påtrykkes en
+tilførselsspenning $V_{CC}$ på 3,3 V. Dette oppsettet gir en
+spenningsdeling mellom sensorresistansen, $R_S$, og $R$:
 
 $$\begin{equation}\label{eq:spenningsdeling}
     V_{IN} = V_{CC} \cdot \frac{R}{R_S + R}
@@ -246,11 +252,12 @@ forholdet kan brytes opp i to mindre: forholdet mellom trykk ($\rho$)
 og sensorresistans ($R_S$), og forholdet mellom sensorresistans
 ($R_S$) og målt spenning ($V_{IN}$).
 
-Målinger på $\rho$--$R_S$-forholdet er gitt i avsnitt 2.2, og kan i
-korte trekk oppsummeres slik: for lette trykk er $R_S \approx 100$ kΩ,
-og for harde trykk går $R_S$ ned til 20 kΩ, med sterkt avtagende
-stigning (fig. 2.10). Forholdet er altså sterkt ulineært: $R_S$ er
-stor når $\rho$ er liten, og $R_S$ er liten når $\rho$ er stor.
+Målinger på $\rho$--$R_S$-forholdet er gitt i
+[avsnitt 2.2](#sec-malinger), og kan i korte trekk oppsummeres slik:
+for lette trykk er $R_S \approx 100$ kΩ, og for harde trykk går $R_S$
+ned til 20 kΩ, med sterkt avtagende stigning
+([fig. 2.10](#fig-litenok)). Forholdet er altså sterkt ulineært: $R_S$
+er stor når $\rho$ er liten, og $R_S$ er liten når $\rho$ er stor.
 
 Det samme gjelder for $R_S$--$V_{IN}$-forholdet, gitt i ligning
 $\eqref{eq:spenningsdeling}$: når den ene går opp, går den andre ned.
@@ -258,20 +265,20 @@ Summen av disse to «inverse» forholdene er at $\rho$ og $V_{IN}$ øker
 i takt: når trykket øker, så øker den målte spenningen, og når trykket
 minker, så minker spenningen. Når $\rho = 0$, så er også $V_{IN} = 0$,
 og i programkoden har `ADC_VARIABEL` verdien 0. Dette er det ideelle
-*nullnivået*, verdien når sensoren ikke er i bruk.
+*nullnivået*, verdien når sensoren ikke er i bruk. {#sec-nullnivaa}
 
-> ![](fig/vin.png)
+> ![](fig/vin.png) {#fig-vin}
 >
-> **Figur 2.4:** $V_{IN}$ som funksjon av $R$ og $R_S$, ligning (2.1)
+> **Figur 2.4:** $V_{IN}$ som funksjon av $R$ og $R_S$, ligning $\eqref{eq:spenningsdeling}$
 
 Hvis 0 V er spenningen som måles for intet trykk, hva er da spenningen
 for et lett trykk (når $R_S = 100$ kΩ)? Det er viktig at denne verdien
 ikke er for lav, ellers vil den ikke reliabelt kunne skilles fra
-nullnivået: $V_{IN\,\text{min}} > 0$ V. Figur 2.4 viser hvordan
-forspenningsmotstanden $R$ innvirker på forholdet mellom $R_S$ og
-$V_{IN}$. Når sensoren tas i bruk, vil vi få et *sprang* på minst
-minimumsverdien, $V_{IN\,\text{min}}$, som selvfølgelig ikke bør være
-så lav at spranget ikke registreres. Men den bør heller ikke være for
+nullnivået: $V_{IN\text{min}} > 0$ V. [Figur 2.4](#fig-vin) viser
+hvordan forspenningsmotstanden $R$ innvirker på forholdet mellom $R_S$
+og $V_{IN}$. Når sensoren tas i bruk, vil vi få et *sprang* på minst
+minimumsverdien, $V_{IN\text{min}}$, som selvfølgelig ikke bør være så
+lav at spranget ikke registreres. Men den bør heller ikke være for
 høy, ellers får vi ikke utnyttet intervallet av $V_{IN}$-verdier
 (verdiområdet) skikkelig.
 
@@ -286,26 +293,27 @@ mellom de «harde trykkene», mens de «lette trykkene» delegeres til et
 snevrere utsnitt.
 
 Veier vi disse hensynene opp mot hverandre, ser vi at en motstand på
-8--15 kΩ kan være egnet. Dette gir $V_{IN\,\text{min}} =
-\text{0,24--0,43}$ V, som svarer til `ADC_VARIABEL` = 19--33: godt
-over det ideelle nullnivået, og god utnyttelse av verdiområdet.
+8--15 kΩ kan være egnet. Dette gir
+$V_{IN\text{min}} = \text{0,24--0,43}$ V, som svarer til
+`ADC_VARIABEL` = 19--33: godt over det ideelle nullnivået, og god
+utnyttelse av verdiområdet.
 
 Men hvordan fungerer sensorene i praksis? Endres sensorresistansen
 over tid? Er nullnivået alltid 0 V? For å få svar på disse
 spørsmålene, må vi foreta noen målinger.
 
-> \* Nettside: <http://www.interlinkelectronics.com/>.
+[^1]: Nettside: <http://www.interlinkelectronics.com/>.
 
-2.2 Målinger
+2.2 Målinger {#sec-malinger}
 ------------
 
 For å fastslå hvordan sensorene oppfører seg under ulike
 omstendigheter, er det foretatt tre forskjellige typer målinger på
 sensorene. Denne informasjonen er nødvendig for å avgjøre sensorenes
 muligheter og begrensninger. Utstyret som er benyttet for disse
-målingene er gitt i tabell 2.1.
+målingene er gitt i [tabell 2.1](#tab-utstyrliste).
 
-> **Tabell 2.1:** Utstyrsliste
+> **Tabell 2.1:** Utstyrsliste {#tab-utstyrliste}
 >
 > |                    |                      |
 > | ------------------ | -------------------- |
@@ -317,12 +325,13 @@ målingene er gitt i tabell 2.1.
 > | Multimeter         |                      |
 
 For å øve et konstant trykk på sensorene, er det brukt en arm som det
-blir lagt vektenheter på, figur 2.6. Hvor på sensorens overflate
-trykket settes, innvirker på motstandsverdien, men armen sørger for å
-holde kontaktflaten og trykkområdet tilnærmet konstant, figur 2.7.
-Uten vektenheter veier armen 18 g.
+blir lagt vektenheter på, [figur 2.6](#fig-malepinne). Hvor på
+sensorens overflate trykket settes, innvirker på motstandsverdien, men
+armen sørger for å holde kontaktflaten og trykkområdet tilnærmet
+konstant, [figur 2.7](#fig-sensorpress). Uten vektenheter veier armen
+18 g.
 
-### 2.2.1 Motstandsverdi ved varierende trykk FSR-400
+### 2.2.1 Motstandsverdi ved varierende trykk FSR-400 {#sec-litenvar}
 
 Motstandsverdien til $R_S$ (i kΩ) måles som direkte følge av trykk på
 overflaten til en sensor av typen FSR-400 (liten sensor). Målingene
@@ -330,18 +339,19 @@ foretas med 5 s mellomrom. Hensikten med denne målingen er å se
 hvordan et konstant trykk påvirker $R_S$ over tid og hva som skjer når
 trykket minker. Går $R_S$-verdien tilbake til utgangspunktet, eller er
 den endret som følge av at sensoren har vært i bruk? Dette er et
-viktig spørsmål hva nullnivået angår.
+viktig spørsmål hva [nullnivået](#sec-nullnivaa) angår.
 
-Måleresultatene er gitt i tabell 2.2 og figur 2.5.
+Måleresultatene er gitt i [tabell 2.2](#tab-litenvar) og
+[figur 2.5](#fig-litenvar).
 
 #### 2.2.1.1 Drøfting av resultatene
 
-Som man kan se av tabell 2.2 er resistansen i sensoren ved 26,7 g
-(tilstand 0) lik uendelig -- sensoren leder ikke. Når trykket så øker
-til 31,05 g (tilstand 1), leder sensoren. Deretter lar man sensoren
-være i tilstand 1 i 20 s, og observerer at resistansen minker, se
-figur 2.5. Men når man nå går tilbake til tilstand 0, kan man se at
-sensoren *fortsatt leder*.
+Som man kan se av [tabell 2.2](#tab-litenvar) er resistansen i
+sensoren ved 26,7 g (tilstand 0) lik uendelig -- sensoren leder ikke.
+Når trykket så øker til 31,05 g (tilstand 1), leder sensoren. Deretter
+lar man sensoren være i tilstand 1 i 20 s, og observerer at
+resistansen minker, se [figur 2.5](#fig-litenvar). Men når man nå går
+tilbake til tilstand 0, kan man se at sensoren *fortsatt leder*.
 
 Sensorresistansen har altså en slags *hysteresefunksjon*. Over tid vil
 denne hysteresen øke noe. Dette må det tas høyde for når sensorene
@@ -349,7 +359,7 @@ skal avleses: Man kan ikke sammenligne de avleste verdiene med et
 fastsatt nullnivå på 0 V, men må i stedet sørge for å *kalibrere*
 nullnivået med jevne mellomrom.
 
-> **Tabell 2.2:** Liten sensor, varierende vekt
+> **Tabell 2.2:** Liten sensor, varierende vekt {#tab-litenvar}
 >
 > | Vektenheter [stk.] | Tillegg til arm [g] | Total vekt [g] | $R_S$ [kΩ] |
 > | ------------------ | ------------------- | -------------- | ---------- |
@@ -367,23 +377,24 @@ nullnivået med jevne mellomrom.
 > | 3                  | 13,05               | 31,05          | 66         |
 > | 2                  | 8,70                | 26,70          | 87         |
 
-> ![](fig/sensormalinger1.png)
+> ![](fig/sensormalinger1.png) {#fig-litenvar}
 >
-> **Figur 2.5:** Liten sensor, varierende vekt (tabell 2.2)
+> **Figur 2.5:** Liten sensor, varierende vekt ([tabell 2.2](#tab-litenvar))
 
-### 2.2.2 Spenningsverdi ved økende trykk, vektene av mellom hver måling
+### 2.2.2 Spenningsverdi ved økende trykk, vektene av mellom hver måling {#sec-okav}
 
-Sensorene blir koblet opp som i figur 2.3 og spenningen over $R$ blir
-målt ved trykk på sensoren. Mellom hver måling tas vektene av, og
-trykket blir 18 g.\* Målingene foretas 5 s etter at vekten er lagt på.
-Spenningen som måles er spenningen ADC-en på kortet ser, så hensikten
-er å måle hvordan spenningen stiger ved enkelttrykk.
+Sensorene blir koblet opp som i [figur 2.3](#fig-sensor) og spenningen
+over $R$ blir målt ved trykk på sensoren. Mellom hver måling tas
+vektene av, og trykket blir 18 g.[^2] Målingene foretas 5 s etter at
+vekten er lagt på. Spenningen som måles er spenningen ADC-en på kortet
+ser, så hensikten er å måle hvordan spenningen stiger ved enkelttrykk.
 
-> \* Lar målearmen ligge for å holde trykkområdet konstant. Vekten på
-> armen er så liten at sensorene påvirkes minimalt av denne, se
-> kapittel 2.2.1.
+[^2]: Lar målearmen ligge for å holde trykkområdet konstant. Vekten på
+armen er så liten at sensorene påvirkes minimalt av denne, se
+[kapittel 2.2.1](#sec-litenvar).
 
-For målingene gjelder ligning (2.1), samt sammenhengene
+For målingene gjelder ligning $\eqref{eq:spenningsdeling}$, samt
+sammenhengene
 
 $$\begin{aligned}
   R_S &= \frac{V_{CC} - V_R}{I_R}\label{eq:resistans}\\
@@ -393,37 +404,41 @@ Målingene er foretatt med $V_{CC} = 4,5$ V og $R = 8,2$ kΩ. Valget av
 verdier er basert på utstyret som var tilgjengelig da målingene ble
 foretatt.
 
-Resultatene for *liten sensor* (FSR-400) er gitt i tabell 2.3 og figur
-2.8, og resultatene for *stor sensor* (FSR-402) er gitt i tabell 2.4
-og figur 2.9.
+Resultatene for *liten sensor* (FSR-400) er gitt i
+[tabell 2.3](#tab-litenokav) og [figur 2.8](#fig-litenokav), og
+resultatene for *stor sensor* (FSR-402) er gitt i
+[tabell 2.4](#tab-storokav) og [figur 2.9](#fig-storokav).
 
 #### 2.2.2.1 Drøfting av resultatene
 
-Av figur 2.8 og 2.11, som viser spenning og motstand mot trykk for
-hhv. liten og stor sensor, kan man se at de to typene gir ganske like
-resultater. Den store sensoren har en noe brattere kurve. Dette kan
-komme av den større overflaten, og at buen på overflatemembranen
-minker resistansen over et større område enn det som faktisk er i
-kontakt med armen, illustrert i figur 2.7.
+Av [figur 2.8](#fig-litenokav) og [2.11](#fig-storok), som viser
+spenning og motstand mot trykk for hhv. liten og stor sensor, kan man
+se at de to typene gir ganske like resultater. Den store sensoren har
+en noe brattere kurve. Dette kan komme av den større overflaten, og at
+buen på overflatemembranen minker resistansen over et større område
+enn det som faktisk er i kontakt med armen, illustrert i
+[figur 2.7](#fig-sensorpress).
 
-Det kommer frem av resultatene i figur 2.8a og figur 2.9a at
-spenningens stigningsendring er ganske jevnt fordelt over
-trykkområdet. Det er derimot ikke den fallende endringen til
-sensorverdien som man kan se i figur 2.8b og figur 2.9b. Dette skyldes
-den ulineære sammenhengen i ligning (2.1).
+Det kommer frem av resultatene i [figur 2.8a](#fig-litenokavspenning)
+og [figur 2.9a](#fig-storokavspenning) at spenningens stigningsendring
+er ganske jevnt fordelt over trykkområdet. Det er derimot ikke den
+fallende endringen til sensorverdien som man kan se i
+[figur 2.8b](#fig-litenokavmotstand) og
+[figur 2.9b](#fig-storokavmotstand). Dette skyldes den ulineære
+sammenhengen i ligning $\eqref{eq:spenningsdeling}$.
 
 Spenningsstigningen har noen ujevnheter, dette kan være fordi
-kontaktpunktet har en unøyaktighet på ±1 mm når vektene tas av.
+kontaktpunktet har en unøyaktighet på $\pm 1$ mm når vektene tas av.
 
-> ![](fig/malepinne.png)
+> ![](fig/malepinne.png) {#fig-malepinne}
 >
 > **Figur 2.6:** Arm for å legge vekt(er) på sensorene
 
-> ![](fig/sensorpress.png)
+> ![](fig/sensorpress.png) {#fig-sensorpress}
 >
 > **Figur 2.7:** Sensor under trykk
 
-> **Tabell 2.3:** Liten sensor, økende vekt, vektene av mellom hver måling
+> **Tabell 2.3:** Liten sensor, økende vekt, vektene av mellom hver måling {#tab-litenokav}
 >
 > | $V_R$ [V] | Vekt [g] | Vektenheter [stk.] | Utr. $I_R$ [µA] | Utr. $R_S$ [kΩ] |
 > | --------- | -------- | ------------------ | --------------- | --------------- |
@@ -447,7 +462,7 @@ kontaktpunktet har en unøyaktighet på ±1 mm når vektene tas av.
 > | 2,18      | 91,95    | 17                 | 265,85          | 8,73            |
 > | 2,20      | 96,30    | 18                 | 268,29          | 8,57            |
 
-> **Tabell 2.4:** Stor sensor, økende vekt, vektene av mellom hver måling
+> **Tabell 2.4:** Stor sensor, økende vekt, vektene av mellom hver måling {#tab-storokav}
 >
 > | $V_R$ [V] | Vekt [g] | Vektenheter [stk.] | Utr. $I_R$ [µA] | Utr. $R_S$ [kΩ] |
 > | --------- | -------- | ------------------ | --------------- | --------------- |
@@ -465,47 +480,49 @@ kontaktpunktet har en unøyaktighet på ±1 mm når vektene tas av.
 > | 1,94      | 65,85    | 11                 | 236,59          | 10,82           |
 > | 2,08      | 70,20    | 12                 | 253,66          | 9,54            |
 
-> ![](fig/sensormalinger2.png)
+> ![](fig/sensormalinger2.png) {#fig-litenokavspenning}
 >
 > (a) Spenning mot trykk
 >
-> ![](fig/sensormalinger3.png)
+> ![](fig/sensormalinger3.png) {#fig-litenokavmotstand}
 >
 > (b) Motstand mot trykk, utregnet fra (a)
 >
-> **Figur 2.8:** Liten sensor, økende vekt, vektene av mellom hver måling (tabell 2.3)
+> **Figur 2.8:** Liten sensor, økende vekt, vektene av mellom hver måling ([tabell 2.3](#tab-litenokav)) {#fig-litenokav}
 
-> ![](fig/sensormalinger4.png)
+> ![](fig/sensormalinger4.png) {#fig-storokavspenning}
 >
 > (a) Spenning mot trykk
 >
-> ![](fig/sensormalinger5.png)
+> ![](fig/sensormalinger5.png) {#fig-storokavmotstand}
 >
 > (b) Motstand mot trykk, utregnet fra (a)
 >
 > **Figur 2.9:** Stor sensor, økende vekt, vektene av mellom hver måling
-> (tabell 2.4)
+> ([tabell 2.4](#tab-storokav)) {#fig-storokav}
 
 ### 2.2.3 Spenningsverdi ved økende trykk, vektene ikke av
 
-Som tidligere i avsnitt 2.2.2 måles spenningen over $R$, men vektene
-blir nå *ikke* tatt av mellom hver måling. Dette er for å minske
-muligheten for bevegelse på armen, og for å vise forventet
+Som tidligere i [avsnitt 2.2.2](#sec-okav) måles spenningen over $R$,
+men vektene blir nå *ikke* tatt av mellom hver måling. Dette er for å
+minske muligheten for bevegelse på armen, og for å vise forventet
 spenning/spenningsendring i tilfelle konstant trykk på sensoren. Her
 venter man 15 s mellom målingene for å la verdien bli tilnærmet stabil
 før vekten økes.
 
-Resultatene for liten sensor er gitt i tabell 2.5 og figur 2.10, og
-resultatene for stor sensor er gitt i tabell 2.6 og figur 2.11.
+Resultatene for liten sensor er gitt i [tabell 2.5](#tab-litenok) og
+[figur 2.10](#fig-litenok), og resultatene for stor sensor er gitt i
+[tabell 2.6](#tab-storok) og [figur 2.11](#fig-storok).
 
 #### 2.2.3.1 Drøfting av resultatene
 
-Ved å sammenligne figurene 2.8 og 2.10 (for liten sensor) og 2.9 og
-2.11 (for stor sensor), kan man se at de er ganske like. Den første
-avlesningen gir imidlertid en mye høyere spenning enn tidligere: Det
-er nå en differanse på ca. 0,25--0,50 V. Denne differansen synker til
-ca. 0,00--0,15 V ved 70,20 g. Følgen er en lavere stigning enn for
-enkelttrykkene.
+Ved å sammenligne figurene [2.8](#fig-litenokav) og
+[2.10](#fig-litenok) (for liten sensor) og [2.9](#fig-storokav) og
+[2.11](#fig-storok) (for stor sensor), kan man se at de er ganske
+like. Den første avlesningen gir imidlertid en mye høyere spenning enn
+tidligere: Det er nå en differanse på ca. 0,25--0,50 V. Denne
+differansen synker til ca. 0,00--0,15 V ved 70,20 g. Følgen er en
+lavere stigning enn for enkelttrykkene.
 
 Dette understreker viktigheten av kontinuerlig kalibrering av
 nullnivået. Det de avleste sensorverdiene blir sammenlignet med for å
@@ -514,7 +531,7 @@ kunne få hendelsesaktivering som følge av at hodebøylen presser mot
 kinnet. Sensorene setter krav til en *dynamisk verdi* for
 hendelsesaktivering.
 
-> **Tabell 2.5:** Liten sensor, økende vekt, vektene ikke av mellom målingene
+> **Tabell 2.5:** Liten sensor, økende vekt, vektene ikke av mellom målingene {#tab-litenok}
 >
 > | $V_R$ [V] | Vekt [g] | Vektenheter [stk.] | Utr. $I_R$ [µA] | Utr. $R_S$ [kΩ] |
 > | --------- | -------- | ------------------ | --------------- | --------------- |
@@ -538,18 +555,18 @@ hendelsesaktivering.
 > | 2,23      | 91,95    | 17                 | 271,95          | 8,35            |
 > | 2,25      | 96,30    | 18                 | 274,39          | 8,20            |
 
-> ![](fig/sensormalinger6.png)
+> ![](fig/sensormalinger6.png) {#fig-litenokspenning}
 >
 > (a) Spenning mot trykk
 >
-> ![](fig/sensormalinger7.png)
+> ![](fig/sensormalinger7.png) {#fig-litenokmotstand}
 >
 > (b) Motstand mot trykk, utregnet fra (a)
 >
 > **Figur 2.10:** Liten sensor, økende vekt, vektene ikke av mellom
-> målingene (tabell 2.5)
+> målingene ([tabell 2.5](#tab-litenok)) {#fig-litenok}
 
-> **Tabell 2.6:** Stor sensor, økende vekt, vektene ikke av mellom målingene
+> **Tabell 2.6:** Stor sensor, økende vekt, vektene ikke av mellom målingene {#tab-storok}
 >
 > | $V_R$ [V] | Vekt [g] | Vektenheter [stk.] | Utr. $I_R$ [µA] | Utr. $R_S$ [kΩ] |
 > | --------- | -------- | ------------------ | --------------- | --------------- |
@@ -573,31 +590,31 @@ hendelsesaktivering.
 > | 2,39      | 91,95    | 17                 | 291,46          | 7,24            |
 > | 2,42      | 96,30    | 18                 | 295,12          | 7,05            |
 
-> ![](fig/sensormalinger8.png)
+> ![](fig/sensormalinger8.png) {#fig-storokspenning}
 >
 > (a) Spenning mot trykk
 >
-> ![](fig/sensormalinger9.png)
+> ![](fig/sensormalinger9.png) {#fig-storokmotstand}
 >
 > (b) Motstand mot trykk, utregnet fra (a)
 >
 > **Figur 2.11:** Stor sensor, økende vekt, vektene ikke av mellom målingene
-> (tabell 2.6)
+> ([tabell 2.6](#tab-storok)) {#fig-storok}
 
-3 Hodebøyle
+3 Hodebøyle {#sec-hodeboyle}
 ===========
 
 > Inneholder en oversikt over hvordan gruppen gikk frem og laget en
 > prototype helt fra bunn. Den skal holde sensorene inntil kinnet og
 > sende informasjon videre til kretskortet som behandler dataene.
 > Prototypen som ble laget, oppfyller til en viss grad alle kravene
-> satt i produktspesifikasjonen, men sensorene ligger litt dårlig mot
-> kinnet og justeringsdelen er litt hard.
+> satt i [produktspesifikasjonen](#sec-produktspes), men sensorene
+> ligger litt dårlig mot kinnet og justeringsdelen er litt hard.
 
-3.1 Problemstilling
+3.1 Problemstilling {#sec-hodeprob}
 -------------------
 
-> ![](fig/prototypeGammel.png)
+> ![](fig/prototypeGammel.png) {#fig-gammelprototype}
 >
 > **Figur 3.1:** Skisse av prototype, laget i AutoCAD
 
@@ -606,7 +623,8 @@ konstruere noe som holder sensorene på plass på utsiden av hvert kinn.
 Siden ingen av gruppedeltagerne har noe erfaring fra lignende
 prosjekter før, og det skal være en prototype, blir design
 nedprioritert. Prototypen skal være behagelig å bruke, må kunne brukes
-av flere brukere og være uproblematisk å ta av og på.
+av flere brukere og være uproblematisk å ta av og på (se
+[produktspesifikasjonen](#sec-produktspes)).
 
 3.2 Gjennomføring
 -----------------
@@ -619,23 +637,23 @@ mulig å ha helt ned til kinnet fra over hodet. Vi ble derfor nødt til
 Ettersom utseendet ikke var så relevant, ble det i første omgang brukt
 spikerbånd, som er ganske bøyelig og enkelt å arbeide med. Det ble
 satt sammen med en skrue og en mutter på hver side av hodet. Det ene
-båndet gikk over hodet, det andre bak (fig. 3.2a). Dette fungerte, men
-det var uten muligheter til å justere og oppfylte derfor ikke alle
-kravene i produktspesifikasjonen.
+båndet gikk over hodet, det andre bak ([fig. 3.2a](#fig-prototype)).
+Dette fungerte, men det var uten muligheter til å justere og oppfylte
+derfor ikke alle kravene i produktspesifikasjonen.
 
-> ![](fig/prototype1.png)
+> ![](fig/prototype1.png) {#fig-prototype}
 >
 > **Figur 3.2:** Første (a) og andre (b) utkast av prototype for hodebøylen
 
 Inspirasjon til videreutvikling ble hentet fra en Koss
 PortaPro-hodebøyle, og det ble funnet en måte å justere hodebøylen på
-(fig. 3.2b). Kravet om å lage en justerbar prototype som kunne
-tilpasses hver enkelt bruker, ble dermed oppfylt. Noe som først ble
-ansett som en fordel for å holde hodebøylen godt på plass, viste seg
-etter hvert å være en ulempe, for med ett bånd som gikk over hodet, og
-ett som gikk bak hodet, ble det veldig problematiskt å ta hodebøylen
-på og av hodet. Det ble altså nok en gang en konflikt mellom kravene i
-produktspesifikasjonen og resultatet.
+([fig. 3.2b](#fig-prototype)). Kravet om å lage en justerbar prototype
+som kunne tilpasses hver enkelt bruker, ble dermed oppfylt. Noe som
+først ble ansett som en fordel for å holde hodebøylen godt på plass,
+viste seg etter hvert å være en ulempe, for med ett bånd som gikk over
+hodet, og ett som gikk bak hodet, ble det veldig problematiskt å ta
+hodebøylen på og av hodet. Det ble altså nok en gang en konflikt
+mellom kravene i produktspesifikasjonen og resultatet.
 
 Etter flere forsøk med spikerbånd, ble det konkludert med at det ikke
 var det best egnet metallet, siden det var svakt og knakk ofte ved mye
@@ -645,19 +663,20 @@ at det er veldig solid og meget slitesterkt, og hvis en bøyer det i
 forkant, er det veldig stivt. Derfor er det mulighet til å få det
 veldig stramt imellom kinn og sensor.
 
-> ![](fig/justering.png)
+> ![](fig/justering.png) {#fig-justeringsboks}
 >
 > **Figur 3.3:** Justeringsboks med lokk (a) og uten lokk (b)
 
 Med det nye «vidundermetallet» kunne det lages en helt ny måte å
 justere hodebøylen på ut ifra inspirasjonen fra Koss PortaPro. Dette
-er illustrert i figur 3.3 og 3.4. Hodebøylen ble laget med tre bånd på
-hver side og koblet sammen med noen justeringsbokser på toppen av
-hodet. Det nye justeringssystemet fungerte mye bedre enn det vi hadde
-fra før. Hodebøylen var justerbart til flere brukere; å sette det av
-og på var uproblematisk, og det var behagelig å ha på seg. Men kravet
-om at det skulle legges press på sensorene mot kinnet, var fortsatt
-ikke oppfylt.
+er illustrert i [figur 3.3](#fig-justeringsboks) og
+[3.4](#fig-prototype3). Hodebøylen ble laget med tre bånd på hver side
+og koblet sammen med noen justeringsbokser på toppen av hodet. Det nye
+justeringssystemet fungerte mye bedre enn det vi hadde fra før.
+Hodebøylen var justerbart til flere brukere; å sette det av og på var
+uproblematisk, og det var behagelig å ha på seg. Men kravet om at det
+skulle legges press på sensorene mot kinnet, var fortsatt ikke
+oppfylt.
 
 Siden det hadde blitt bestemt at det ikke skulle være noe bak hodet
 for å stramme opp, pga. praktiske årsaker, kom vi frem til at det
@@ -666,14 +685,14 @@ festet til det punktet som sensorene på hodebøylen skulle festes. Ved
 hjelp av dette oppfyltes alle kravene som hadde blitt satt. Det eneste
 som manglet nå var å plassere sensorene og få det hele koblet til
 kretskortet med mikroprosessoren. (Mer om sensorkonfigurasjon i
-kapittel 6.)
+[kapittel 6](#sec-funksjonalitet).)
 
 Det å få festet sensorene på hodebøylen ble gjort veldig enkelt: Først
 ble det brukt to metallplater, en på hver side. Deretter ble de små
 kretskortene som sensorene er koblet sammen på, festet på
 metallplatene.
 
-> ![](fig/heleGreia.png)
+> ![](fig/heleGreia.png) {#fig-prototype3}
 >
 > **Figur 3.4:** Tegning av hodebøylens justeringsmuligheter
 
@@ -688,9 +707,9 @@ og koblet til sensorene på hver sin side, slik at alle signalene fra
 sensorene blir sendt samlet gjennom en kabel til prosessoren som skal
 ta imot. På enden av kabelen ble det montert et motstykke til en
 COM-port, dette for å gjøre det enkelt å koble hodebøylen til
-«X-box»-en i kapittel 4 (fig. 3.5).
+«X-box»-en i [kapittel 4](#sec-xbox) ([fig. 3.5](#fig-signalkabel)).
 
-> ![](fig/overgangtilCOM.png)
+> ![](fig/overgangtilCOM.png) {#fig-signalkabel}
 >
 > **Figur 3.5:** Bilde av signalkabel
 
@@ -698,38 +717,40 @@ COM-port, dette for å gjøre det enkelt å koble hodebøylen til
 ------------
 
 En prototype av en hodebøyle som oppfylte de kravene som hadde blitt
-satt i forkant (figur 3.6). Det passer til flere brukere ved hjelp av
-justeringsmulighetene, og det er lett å koble opp og komme igang med.
-Det er to ulemper med den ferdige prototypen. Den ene er at
-justeringsdelen er litt hard. Den andre er at hodebøylen ikke har nok
-press mot kinnet hvor sensorene ligger. (Begge disse problemene vil
-være enkelt å løse på en ev. ferdig versjon ved hjelp av noen som har
-en bedre bakgrunn i mekanikk og ev. annet utstyr som gruppen ikke
-hadde til rådighet.)
+satt i forkant ([figur 3.6](#fig-ferdigprototype)). Det passer til
+flere brukere ved hjelp av justeringsmulighetene, og det er lett å
+koble opp og komme igang med. Det er to ulemper med den ferdige
+prototypen. Den ene er at justeringsdelen er litt hard. Den andre er
+at hodebøylen ikke har nok press mot kinnet hvor sensorene ligger.
+(Begge disse problemene vil være enkelt å løse på en ev. ferdig
+versjon ved hjelp av noen som har en bedre bakgrunn i mekanikk og ev.
+annet utstyr som gruppen ikke hadde til rådighet.)
 
-> ![](fig/prototype2.png)
+> ![](fig/prototype2.png) {#fig-ferdigprototype}
 >
 > **Figur 3.6:** Ferdig prototype
 
-4 X-box
+4 X-box {#sec-xbox}
 =======
 
 > Inneholder en kort beskrivelse av hvordan «X-box»-en ble laget og
 > hva den brukes til. Bakgrunnen til at «X-box»-en ble laget er gitt i
-> kapittel 3. «X-box»-en skal inneholde elektronikken som behandler
-> dataen fra hodebøylen, og sender den videre til PC-en.
+> [kapittel 3](#sec-hodeboyle). «X-box»-en skal inneholde
+> elektronikken som behandler dataen fra hodebøylen, og sender den
+> videre til PC-en.
 
 4.1 Problemstilling
 -------------------
 
-> ![](fig/x-boxsalangt.png)
+> ![](fig/x-boxsalangt.png) {#fig-xboxacad}
 >
 > **Figur 4.1:** Skisse av «X-box», laget i AutoCAD
 
 Det var et behov for et mellomledd mellom selve musen (hodebøylen,
-kap. 3) og datamaskinen. Dette bindingspunktet måtte enkelt kunne
-kobles til hodebøylen via COM-port og samtidig kunne kobles videre via
-USB til PC-en. Det måtte inneholde kretskortet til mikroprosessoren.
+[kap. 3](#sec-hodeboyle)) og datamaskinen. Dette bindingspunktet måtte
+enkelt kunne kobles til hodebøylen via COM-port og samtidig kunne
+kobles videre via USB til PC-en. Det måtte inneholde kretskortet til
+mikroprosessoren.
 
 4.2 Gjennomføring
 -----------------
@@ -743,30 +764,32 @@ koden underveis. Det ble brukt en metalplate som bøydes 90° på hver
 side. Dette utgjorde underlaget til boksen og 2 «vegger». Kretskortet
 ble festet inne i boksen ved hjelp av gaffateip, og plasseringen av
 kortet var så nær den ene kanten uten «vegg» slik at den lett kan
-kobles til USB-kabelen (som en kan se på fig. 4.2). Siden det skulle
-være COM-kontakt mot hodebøylen, ble det laget et hull i den ene siden
-hvor COM-porten ble satt inn. Det ble strukket ledninger som på den
-ene siden var loddet fast til kretskortet, den andre enden til
-COM-porten. Nå var det altså bare å koble i headsettet på den ene
-siden, og maskinen med USB på den andre. «That's Plug 'n' Play!»
+kobles til USB-kabelen (som en kan se på [fig. 4.2](#fig-xboxtopp)).
+Siden det skulle være COM-kontakt mot hodebøylen, ble det laget et
+hull i den ene siden hvor COM-porten ble satt inn. Det ble strukket
+ledninger som på den ene siden var loddet fast til kretskortet, den
+andre enden til COM-porten. Nå var det altså bare å koble i headsettet
+på den ene siden, og maskinen med USB på den andre. «That's Plug 'n'
+Play!»
 
-> ![](fig/x-box2.png)
+> ![](fig/x-box2.png) {#fig-xboxtopp}
 >
 > **Figur 4.2:** Bilde av «X-box» fra toppen
 
 4.3 Resultat
 ------------
 
-En boks som skal være et bindeledd mellom PC-en og musen (figur 4.3).
-Den har en COM-port som var gruppens løsning for å på en enkel måte
-koble til hodebøylen. Videre går data fra hodebøylen inn til
-kretskortet, og videre til maskinen som utfører ønskede operasjoner.
+En boks som skal være et bindeledd mellom PC-en og musen
+([figur 4.3](#fig-xboxferdig)). Den har en COM-port som var gruppens
+løsning for å på en enkel måte koble til hodebøylen. Videre går data
+fra hodebøylen inn til kretskortet, og videre til maskinen som utfører
+ønskede operasjoner.
 
-> ![](fig/x-box1.png)
+> ![](fig/x-box1.png) {#fig-xboxferdig}
 >
 > **Figur 4.3:** Bilde av ferdig «X-box»
 
-5 Elektronikk
+5 Elektronikk {#sec-elektronikk}
 =============
 
 > Dette kapittelet tar for seg valg av krets for tolking og
@@ -796,16 +819,16 @@ Kretsen skal ikke sette krav til brukerens tekniske kunnskaper.
 Kretsen må kunne lese analoge data og digitalisere den å sende den
 videre (analog-til-digital-omformer, ADC). Den skal også være den
 billigste mulige løsningen som kan tilfredsstille alle
-spesifikasjonene.
+[spesifikasjonene](#sec-produktspes).
 
 5.2 Valg av krets
 -----------------
 
 Prosjektgruppen velger å bruke AT90USBKey, som er en demokrets fra
-Atmel [Vedlegg 3].\* Kretsen inneholder mikrokontrolleren AT90USB1287
-[Vedlegg 4].
+Atmel [[Vedlegg 3](#ref-usbkey)].[^3] Kretsen inneholder
+mikrokontrolleren AT90USB1287 [[Vedlegg 4](#ref-uk)].
 
-> \* <http://www.atmel.com/dyn/products/tools_card.asp?tool_id=3879>.
+[^3]: <http://www.atmel.com/dyn/products/tools_card.asp?tool_id=3879>.
 
 Denne kretsen ble valgt på grunnlag av at den inneholder
 USB-brukergrensesnitt mot PC, og er tidsbesparende siden
@@ -818,45 +841,46 @@ problem for prototypen, som bare bruker seks ADC-porter. Men ønsker
 man å bruke portene PF0 og PF3, kan kretsen endres ved å fysisk fjerne
 tilkoblingen til temperaturavlesningen.
 
-> ![](fig/USBkey.png)
+> ![](fig/USBkey.png) {#fig-at90usbkey}
 >
 > **Figur 5.1:** AT90USBKey
 
 Atmel har laget et USB Human Interface Device (HID)-kompatibelt
-musegrensesnitt for mikrokontrolleren.\* Ved å bruke dette sparer
+musegrensesnitt for mikrokontrolleren.[^4] Ved å bruke dette sparer
 prosjektgruppen ytterligere med arbeidstid, men dette betyr at avlest
 data må behandles av mikrokontrolleren før den sendes til PC (for
-databehandling, se kapittel 6).
+databehandling, se [kapittel 6](#sec-funksjonalitet)).
 
-> \* Lisensen for den medfølgende programvaren til Atmel er gitt i
-> `LICENSE.TXT` i [Vedlegg 1].
+[^4]: Lisensen for den medfølgende programvaren til Atmel er gitt i
+`LICENSE.TXT` i [[Vedlegg 1](#ref-program)].
 
 Alternativet til denne kretsen var å designe en egen krets med
 Bluetooth/USB-grensesnitt mot PC for bruker, og et
 programmeringsgrensesnitt for utvikling. Denne kretsen ville også
 blitt bygd rundt en mikrokontroller fra Atmel, grunnet faglig
 kompetanse hos HiST. Mer om hva som kan gjøres videre er gitt i
-kapittel 10 -- design av kretsen(e) er utenfor prosjektgruppens
-hovedproblemstilling.
+[kapittel 10](#sec-veienvidere) -- design av kretsen(e) er utenfor
+prosjektgruppens [hovedproblemstilling](#sec-hovedproblemstilling).
 
-5.3 Strømforsyning
+5.3 Strømforsyning {#sec-stromforsyning}
 ------------------
 
 Den innebygde spenningskretsen på AT90USBKey gjør det mulig å bruke
 strøm direkte fra USB-porten eller fra et eksternt batteri (se
-kapittel 10 for bruk av batteri). I vårt tilfelle bruker vi 5 V
-spenningen fra USB-kontakten for å forsyne kretsen. Se figur 5.2 for
-skjemategning over strømforsyningen fra USB. Fordelene med dette er at
-kretsen blir billigere og mindre komplisert. Spenningen blir gjort om
-til ca. 3,3 V ved hjelp av en lineær CMOS-spenningsregulator. Den
-nøyaktige utspenningen fra denne kan beregnes fra formelen
+[kapittel 10](#sec-veienvidere) for bruk av batteri). I vårt tilfelle
+bruker vi 5 V spenningen fra USB-kontakten for å forsyne kretsen. Se
+[figur 5.2](#fig-powerkrets-usb) for skjemategning over
+strømforsyningen fra USB. Fordelene med dette er at kretsen blir
+billigere og mindre komplisert. Spenningen blir gjort om til ca. 3,3 V
+ved hjelp av en lineær CMOS-spenningsregulator. Den nøyaktige
+utspenningen fra denne kan beregnes fra formelen
 
 $$V_{CC3} = 1,25 \cdot \left(1 + \frac{R_{15}+R_{18}}{R_{19}}\right)$$
 
 Dette gir en utspenning på $V_{CC3} = 3,266$ V. Denne spenningen blir
 også benyttet av sensorene som er koblet til.
 
-> ![](fig/power.png)
+> ![](fig/power.png) {#fig-powerkrets-usb}
 >
 > **Figur 5.2:** AT90USBKey-powerkrets
 
@@ -870,11 +894,11 @@ utrustet og klargjort for dette. Enheter kan bli koblet til og fra
 uten å måtte restarte systemet. Drivere blir automatisk lastet inn og
 enheten blir dermed gjenkjent og gjort klar til bruk («Plug 'n'
 Play»). En USB-inngang kan tilkobles så mange som 127 enheter og kan
-levere totalt opp til en halv ampere strøm til periferiutstyr.\*
+levere totalt opp til en halv ampere strøm til periferiutstyr.[^5]
 
-> \* Standard 100 mA, maksimalt 500 mA etter forespørsel.
+[^5]: Standard 100 mA, maksimalt 500 mA etter forespørsel.
 
-6 Funksjonalitet
+6 Funksjonalitet {#sec-funksjonalitet}
 ================
 
 > Sensorene plasseres utenpå kinnene, to store knappsensorer og fire
@@ -891,13 +915,15 @@ levere totalt opp til en halv ampere strøm til periferiutstyr.\*
 6.1 Problemstilling
 -------------------
 
-Plug 'n' Play USB-musegrensesnittet mot PC, valgt i kapittel 5,
-begrenser funksjonaliteten til *standard musefunksjoner*: horisontal,
-vertikal og diagonal bevegelse, venstre- og høyre museknapp, og
-scroll.\* Den videre problemstillingen er hvordan disse funksjonene
-skal aktiveres ved å bruke sensorene.
+Plug 'n' Play USB-musegrensesnittet mot PC, valgt i [kapittel
+5](#sec-elektronikk), begrenser funksjonaliteten til *standard
+musefunksjoner*: horisontal, vertikal og diagonal bevegelse, venstre-
+og høyre museknapp, og scroll (se
+[produktspesifikasjonen](#sec-produktspes)).[^6] Den videre
+problemstillingen er hvordan disse funksjonene skal aktiveres ved å
+bruke sensorene.
 
-> \* Se produktspesifikasjonen.
+[^6]: Se produktspesifikasjonen.
 
 Den fysiske plasseringen av sensorene må være enkel og intuitiv.
 Implementeringen av musefunksjonene må gjøres på bakgrunn av antall
@@ -905,14 +931,15 @@ sensorer og plassering.
 
 Det må også tas stilling til hvordan hver enkelt sensor avleses.
 Avleste verdier må nødvendigvis sammenlignes med et *nullnivå* for å
-avgjøre om de er i bruk. Målingene i kapittel 2 tilsier at dette
-nullnivået bør oppdateres med jevne mellomrom -- mikrokontrolleren bør
-ta høyde for at sensorene kan henge seg opp, og kalibrere deretter.
+avgjøre om de er i bruk. Målingene i [kapittel 2](#sec-sensorkap)
+tilsier at dette nullnivået bør oppdateres med jevne mellomrom --
+mikrokontrolleren bør ta høyde for at sensorene kan henge seg opp, og
+kalibrere deretter.
 
 6.2 Plassering av sensorene
 ---------------------------
 
-> ![](fig/bevsensor.png)
+> ![](fig/bevsensor.png) {#fig-trebevsensorer}
 >
 > **Figur 6.1:** Sensorplate med tre bevegelsessensorer i linje (a) og trekant (b)
 
@@ -921,47 +948,51 @@ i direkte kontakt, må sensorene festes utenpå kinnet. Dermed unngår
 man også spørsmål rundt hygiene ved brukerbytte.
 
 Sensorene kan festes på kinnet på flere måter. Det er valgt å bruke en
-hodebøyle (se kap. 3) med plater som sensorene festes på.\* Platene må
-ha riktig antall sensorer, som igjen må ha riktig plassering mellom
-hverandre for å gi en god brukerfølelse. For å gjøre det intuitivt, er
-knapp- og bevegelsessensorene plassert på hvert sitt kinn.
+hodebøyle (se [kap. 3](#sec-hodeboyle)) med plater som sensorene
+festes på.[^7] Platene må ha riktig antall sensorer, som igjen må ha
+riktig plassering mellom hverandre for å gi en god brukerfølelse. For
+å gjøre det intuitivt, er knapp- og bevegelsessensorene plassert på
+hvert sitt kinn.
 
-> \* Festemekanismen kan videreutvikles, se kapittel 10.
+[^7]: Festemekanismen kan videreutvikles, se
+[kapittel 10](#sec-veienvidere).
 
 De *fire hovedretningene* regner vi som oppover, nedover, til venstre
 og til høyre. Dersom *diagonal bevegelse* (kombinasjoner av
 hovedretningene) også er et krav, må det plasseres minst tre sensorer
-på «bevegelseskinnet».\* Disse må kunne aktiveres samtidig, og det må
-tas hensyn til hvilken sensor som er mest aktiv.
+på «bevegelseskinnet».[^8] Disse må kunne aktiveres samtidig, og det
+må tas hensyn til hvilken sensor som er mest aktiv.
 
-> \* Man *kan* klare seg med færre dersom man bruker ulikt trykk for
-> ulike retninger, men kapittel 2 antyder at dette blir vanskelig.
+[^8]: Man *kan* klare seg med færre dersom man bruker ulikt trykk for
+ulike retninger, men [kapittel 2](#sec-sensorkap) antyder at dette
+blir vanskelig.
 
-Som vi ser av figur 6.1, krever minst én av hovedretningene at man
-trykker på to av de tre sensorene samtidig. Dette blir veldig
-vanskelig å skille fra diagonal bevegelse, og derfor forkaster vi
-disse konfigurasjonene. *Hovedretningene er viktigere enn
+Som vi ser av [figur 6.1](#fig-trebevsensorer), krever minst én av
+hovedretningene at man trykker på to av de tre sensorene samtidig.
+Dette blir veldig vanskelig å skille fra diagonal bevegelse, og derfor
+forkaster vi disse konfigurasjonene. *Hovedretningene er viktigere enn
 diagonalretningene.* Ved å bruke fire sensorer for bevegelse, får hver
 hovedretning sin egen sensor, og diagonal bevegelse fås ved å aktivere
 to sensorer samtidig. Det er dette oppsettet vi bruker i vår *første
 tilnærming*.
 
-6.3 Første tilnærming
+6.3 Første tilnærming {#sec-forstetilnerming}
 ---------------------
 
-> ![](fig/bevsensorfirkant1.png)
+> ![](fig/bevsensorfirkant1.png) {#fig-sensorknapper1}
 >
 > **Figur 6.2:** Første tilnærming: knapper på venstre kinn (a)
 > og bevegelse på høyre kinn (b)
 
 Den første tilnærmingen anvender fire *små* sensorer (type FSR-400)
 for bevegelse på venstre kinn og to *store* sensorer (type FSR-402)
-for knapper på høyre kinn (fig. 6.2). Bevegelsessensorene er plassert
-i «stjerne» og svarer til himmelretningene på et kompass -- ved å
-presse på den øverste sensoren, går pekeren oppover, osv. Når trykket
-forsvinner, slutter bevegelsen.
+for knapper på høyre kinn ([fig. 6.2](#fig-sensorknapper1)).
+Bevegelsessensorene er plassert i «stjerne» og svarer til
+himmelretningene på et kompass -- ved å presse på den øverste
+sensoren, går pekeren oppover, osv. Når trykket forsvinner, slutter
+bevegelsen.
 
-> ![](fig/retninger.png)
+> ![](fig/retninger.png) {#fig-retninger}
 >
 > **Figur 6.3:** Retninger i intervallet 0--90°.
 > Tallene på aksene ganges med basishastigheten.
@@ -969,10 +1000,10 @@ forsvinner, slutter bevegelsen.
 Diagonal bevegelse fås ved å trykke på to nærliggende sensorer
 samtidig. Dersom man presser ekstra hardt, beveger pekeren seg opptil
 fem ganger raskere. Dette gir teoretisk 72 flere retninger dersom man
-øver ulikt trykk på to nærliggende sensorer (fig. 6.3), dvs. en
-gjennomsnittlig oppløsning på 4,5°. (I praksis er bare de fire første
-hastighetene oppnåelige, noe som gir 40 ekstra retninger og 7,5°
-gjennomsnittlig oppløsning.)
+øver ulikt trykk på to nærliggende sensorer ([fig.
+6.3](#fig-retninger)), dvs. en gjennomsnittlig oppløsning på 4,5°. (I
+praksis er bare de fire første hastighetene oppnåelige, noe som gir 40
+ekstra retninger og 7,5° gjennomsnittlig oppløsning.)
 
 Knappsensorene er plassert side om side og svarer til henholdsvis
 venstre og høyre museknapp. Et enkelt trykk gir et enkelt klikk. For å
@@ -990,9 +1021,10 @@ venstre museknapp inne mens pekeren beveges.
 ### Avlesning av én sensor
 
 Hver sensor er forspent og koblet til en egen
-analog-til-digital-omformer (ADC) som beskrevet i kapittel 2. ADC-ene
-avleses kontinuerlig -- opptil 125 ganger i sekundet -- og verdiene
-analyseres for å fastslå om en sensor er i bruk.
+analog-til-digital-omformer (ADC) som beskrevet i
+[kapittel 2](#sec-sensorkap). ADC-ene avleses kontinuerlig -- opptil
+125 ganger i sekundet -- og verdiene analyseres for å fastslå om en
+sensor er i bruk.
 
 For å finne ut om en sensor er aktiv, må den avleste verdien
 sammenlignes med en verdi for når sensoren *ikke* er i bruk,
@@ -1007,7 +1039,7 @@ Når dette er oppfylt, sier vi at vi «har et sprang». Marginen er
 fastsatt på forhånd, og er litt større for de store sensorene på
 knappkinnet enn de små sensorene på bevegelseskinnet.
 
-> ![](fig/kalibrering.png)
+> ![](fig/kalibrering.png) {#fig-kalibrering}
 >
 > **Figur 6.4:** Selvkalibrering og avlesning av sensor
 
@@ -1016,19 +1048,20 @@ sensorene kommer i klem, og dermed gir en høyere verdi. Derfor bør
 ikke nullnivået fastsettes på forhånd, men i stedet *kalibreres*
 automatisk med utgangspunkt i de avleste verdiene.
 
-Figur 6.4 viser avlesing og kalibrering av én enkelt sensor. Den
-første avlesningen av sensoren etablerer nullnivået, som videre
-avlesninger sammenlignes med. Deretter avleses sensoren kontinuerlig
-og sammenlignes med nullnivået. Hvis differansen er stor nok,
-betraktes sensoren som aktiv, og en musefunksjon utføres. Hvis
-differansen ikke er stor nok, derimot, blir nullnivået *rekalibrert*:
-nullnivået settes til den avleste verdien.
+[Figur 6.4](#fig-kalibrering) viser avlesing og kalibrering av én
+enkelt sensor. Den første avlesningen av sensoren etablerer
+nullnivået, som videre avlesninger sammenlignes med. Deretter avleses
+sensoren kontinuerlig og sammenlignes med nullnivået. Hvis differansen
+er stor nok, betraktes sensoren som aktiv, og en musefunksjon utføres.
+Hvis differansen ikke er stor nok, derimot, blir nullnivået
+*rekalibrert*: nullnivået settes til den avleste verdien.
 
 Rekalibreringen begrenset til hver 250. gjennomgang i programmet
-[Vedlegg 1], slik at bare 250 påfølgende avlesninger uten «sprang» gir
-rekalibrering. Dette medfører at dersom sensoren gradvis kommer under
-press (eller presset gradvis opphører), vil nullnivået oppdateres,
-mens hvis sensoren plutselig tas i bruk, vil en musefunksjon utføres.
+[[Vedlegg 1](#ref-program)], slik at bare 250 påfølgende avlesninger
+uten «sprang» gir rekalibrering. Dette medfører at dersom sensoren
+gradvis kommer under press (eller presset gradvis opphører), vil
+nullnivået oppdateres, mens hvis sensoren plutselig tas i bruk, vil en
+musefunksjon utføres.
 
 Det kan tenkes at en sensor plutselig kommer under varig press selv om
 den ikke er i bruk, f.eks. ved å flytte på hodebøylen. I slike
@@ -1043,40 +1076,41 @@ tabell, og de seks nullnivåene, som disse sammenlignes med, i en
 annen. Det går så igjennom tabellene parvis og sjekker dem opp mot
 ligning (6.1) -- på leting etter en aktiv sensor.
 
-> ![](fig/sensortabenkel.png)
+> ![](fig/sensortabenkel.png) {#fig-sensortabenkel}
 >
-> ![](fig/sensortabtung.png)
+> ![](fig/sensortabtung.png) {#fig-sensortabtung}
 >
-> **Figur 6.5:** Avlesningsløkker: enkel (a) og avansert (b)
+> **Figur 6.5:** Avlesningsløkker: enkel (a) og avansert (b) {#fig-sensortab}
 
-Når en aktiv sensor er funnet, er det to muligheter (fig. 6.5). Skal
-(a) resten av sensorene også undersøkes, eller (b) søket avsluttes og
-den aktive sensoren returneres? Hvis vi bare returnerer den første
-aktive sensoren, må vi legge inn en ekstra «nabosjekk» av nærliggende
-sensorer for å oppdage om to bevegelsessensor brukes samtidig
-(diagonal bevegelse).\* Hvis vi søker gjennom hele tabellen, derimot,
-vil alle aktive sensorer gi musefunksjoner (noe som håndterer diagonal
-bevegelse automatisk), men kan gi uønskede eller ingen musebevegelse
-ved noen sensorkombinasjoner.
+Når en aktiv sensor er funnet, er det to muligheter
+([fig. 6.5](#fig-sensortab)). Skal (a) resten av sensorene også
+undersøkes, eller (b) søket avsluttes og den aktive sensoren
+returneres? Hvis vi bare returnerer den første aktive sensoren, må vi
+legge inn en ekstra «nabosjekk» av nærliggende sensorer for å oppdage
+om to bevegelsessensor brukes samtidig (diagonal bevegelse).[^9] Hvis
+vi søker gjennom hele tabellen, derimot, vil alle aktive sensorer gi
+musefunksjoner (noe som håndterer diagonal bevegelse automatisk), men
+kan gi uønskede eller ingen musebevegelse ved noen
+sensorkombinasjoner.
 
-> \* Dette gjøres ved å slå opp i en matrise som inneholder
-> informasjon om hvilke sensorer som er i nærheten av hverandre. Hvis
-> sensoren for bevegelse oppover er i bruk, for eksempel, ønsker vi
-> bare å undersøke sensorene for bevegelse til venstre og høyre, ikke
-> sensoren for bevegelse nedover.
+[^9]: Dette gjøres ved å slå opp i en matrise som inneholder
+informasjon om hvilke sensorer som er i nærheten av hverandre. Hvis
+sensoren for bevegelse oppover er i bruk, for eksempel, ønsker vi bare
+å undersøke sensorene for bevegelse til venstre og høyre, ikke
+sensoren for bevegelse nedover.
 
-Fordelen med å gjøre det på den andre og mer «tungvinte» måten i figur
-6.5b, hvor vi stanser søket når en aktiv sensor er funnet og sjekker
-om denne sensoren har en aktiv «nabosensor», er er at den er mer
-fleksibel. Det er lettere å «gardere» mot aktive sensorer på begge
-kinn, som er signalet for manuell rekalibrering. Dessuten kan
-funksjonen som returnerer den første aktive sensoren, lett skrives om
-til å returnere den *mest* aktive sensoren dersom det viser seg
-vesentlig å skille mellom flere sensortrykk.\* I vår første tilnærming
-returneres bare den første aktive sensoren, men forholdene ligger til
-rette for en omskrivning.
+Fordelen med å gjøre det på den andre og mer «tungvinte» måten i
+[figur 6.5b](#fig-sensortabtung), hvor vi stanser søket når en aktiv
+sensor er funnet og sjekker om denne sensoren har en aktiv
+«nabosensor», er er at den er mer fleksibel. Det er lettere å
+«gardere» mot aktive sensorer på begge kinn, som er signalet for
+manuell rekalibrering. Dessuten kan funksjonen som returnerer den
+første aktive sensoren, lett skrives om til å returnere den *mest*
+aktive sensoren dersom det viser seg vesentlig å skille mellom flere
+sensortrykk.[^10] I vår første tilnærming returneres bare den første
+aktive sensoren, men forholdene ligger til rette for en omskrivning.
 
-> \* Dette gjør vi i andre tilnærming.
+[^10]: Dette gjør vi i [andre tilnærming](#sec-andretilnerming).
 
 For å produsere ett klikk av gangen, er det bygd inn en forsinkelse
 som overser aktive knappsensorer etter at de er funnet aktive første
@@ -1084,15 +1118,16 @@ gang. Dette forhindrer hundrevis av klikk mens sensoren er i bruk.
 Forsinkelsen er innstilt slik at brukeren kan dobbeltklikke ved å
 presse kontinuerlig.
 
-### 6.3.3 Drøfting
+### 6.3.3 Drøfting {#sec-forstedrofting}
 
-Tilnærmingen er utførlig testet i kapittel 7. De viktigste funnene er
-at tungemuskelen fort blir sliten av å kontinuerlig presse på
-sensorene, og at det er tyngre dess lengre bak på kinnet man kommer.
-Med venstre og høyre knappsensor plassert side om side, kommer venstre
-knappsensor langt bak på kinnet (fig. 6.2a). Det samme gjelder høyre
+Tilnærmingen er utførlig testet i [kapittel 7](#sec-testingmedtungen).
+De viktigste funnene er at tungemuskelen fort blir sliten av å
+kontinuerlig presse på sensorene, og at det er tyngre dess lengre bak
+på kinnet man kommer. Med venstre og høyre knappsensor plassert side
+om side, kommer venstre knappsensor langt bak på kinnet
+([fig. 6.2a](#fig-sensorknapper1)). Det samme gjelder høyre
 bevegelsessensor, som er plassert i «stjerne» med de andre
-bevegelsessensorene (fig. 6.2b).
+bevegelsessensorene ([fig. 6.2b](#fig-sensorknapper1)).
 
 Det er også et problem at det ikke er mulig å «dra» musepekeren.
 Ettersom tungen ikke kan presse på begge kinnene samtidig, kan dette
@@ -1105,16 +1140,17 @@ blir mer vertikal med hensyn til munnen, og vi skriver om programmet
 til å «huske» en oppgave over flere sensoravlesninger. Resultatet er
 mer omfattende, men også mer komfortabelt.
 
-6.4 Andre tilnærming
+6.4 Andre tilnærming {#sec-andretilnerming}
 --------------------
 
-> ![](fig/bevsensorfirkant2.png)
+> ![](fig/bevsensorfirkant2.png) {#fig-sensorknapper2}
 >
 > **Figur 6.6:** Andre tilnærming: knapper (a) og bevegelse (b).
 
 I andre tilnærming plasserer vi bevegelsessensorene i «firkant»
-istedenfor «stjerne» for å få dem lengre frem på kinnet (fig. 6.6).
-Knappsensorene er plassert ovenfor hverandre istedenfor side om side.
+istedenfor «stjerne» for å få dem lengre frem på kinnet
+([fig. 6.6](#fig-sensorknapper2)). Knappsensorene er plassert ovenfor
+hverandre istedenfor side om side.
 
 Programmet tar nå utgangspunkt i den *mest* aktive sensoren, ikke bare
 den første.
@@ -1124,20 +1160,20 @@ seg i. I utgangspunktet befinner programmet seg i *normalmodus*, hvor
 knappsensorene produserer klikk og bevegelsessensorene styrer pekeren.
 Den viktigste forskjellen er måten pekeren styres på.
 
-### 6.4.1 Normalmodus
+### 6.4.1 Normalmodus {#sec-normmodus}
 
-> ![](fig/normalmodusstart.png)
+> ![](fig/normalmodusstart.png) {#fig-normalmodusstart}
 >
-> ![](fig/normalmodusbev.png)
+> ![](fig/normalmodusbev.png) {#fig-normalmodusbev}
 >
-> **Figur 6.7:** Normalmodus: klikk (a) og bevegelse (b)
+> **Figur 6.7:** Normalmodus: klikk (a) og bevegelse (b) {#fig-normalmodus}
 
-Dette er programmets utgangspunkt (fig. 6.7). Hvis brukeren trykker
-lett på en knappsensor, produseres et klikk. Hvis brukeren trykker
-lett på en bevegelsessensor, beveger pekeren seg i sensorens retning,
-og *fortsetter å bevege seg* selv om brukeren ikke presser
-kontinuerlig. Pekeren styres med lette trykk istedenfor kontinuerlig
-pressing, noe som er mer behagelig for tungen.
+Dette er programmets utgangspunkt ([fig. 6.7](#fig-normalmodus)). Hvis
+brukeren trykker lett på en knappsensor, produseres et klikk. Hvis
+brukeren trykker lett på en bevegelsessensor, beveger pekeren seg i
+sensorens retning, og *fortsetter å bevege seg* selv om brukeren ikke
+presser kontinuerlig. Pekeren styres med lette trykk istedenfor
+kontinuerlig pressing, noe som er mer behagelig for tungen.
 
 Når pekeren beveger seg, kan brukeren skifte retning ved å trykke på
 en annen bevegelsessensor, og få bevegelsen til å opphøre ved å trykke
@@ -1158,11 +1194,11 @@ For presisjonens skyld er diagonal bevegelse *deaktivert* når pekeren
 beveges med lette trykk. Det er bare mulig å bevege seg diagonalt ved
 å presse kontinuerlig på sensorene.
 
-> ![](fig/dramodus.png)
+> ![](fig/dramodus.png) {#fig-dramodus}
 >
 > **Figur 6.8:** «Dra»-modus
 
-> ![](fig/scrollmodus.png)
+> ![](fig/scrollmodus.png) {#fig-scrollmodus}
 >
 > **Figur 6.9:** «Scroll»-modus
 
@@ -1170,9 +1206,9 @@ beveges med lette trykk. Det er bare mulig å bevege seg diagonalt ved
 
 Ved å presse kontinuerlig på knappsensorene istedenfor å bare trykke,
 bytter man fra normalmodus til andre moduser. Venstre knappsensor
-bytter til «dra»-modus (fig. 6.8), slik at venstre museknapp holdes
-nede også når sensoren slippes. Dermed kan tungen flyttes over på
-bevegelseskinnet for å «dra» pekeren.
+bytter til «dra»-modus ([fig. 6.8](#fig-dramodus)), slik at venstre
+museknapp holdes nede også når sensoren slippes. Dermed kan tungen
+flyttes over på bevegelseskinnet for å «dra» pekeren.
 
 «Dra»-modus fungerer ellers som normalmodus; pekeren styres på akkurat
 samme måte. For å gå tilbake til normalmodus, er det bare å berøre
@@ -1180,16 +1216,18 @@ knappsensoren en gang til.
 
 ### 6.4.3 «Scroll»-modus
 
-Høyre knappsensor bytter til «scroll»-modus (fig. 6.9). Man scroller
-oppover ved å presse på øvre bevegelsessensor, og nedover ved å presse
-på nedre bevegelsessensor. For å gå tilbake til normalmodus, trykker
-man på en av knappsensorene.
+Høyre knappsensor bytter til «scroll»-modus
+([fig. 6.9](#fig-scrollmodus)). Man scroller oppover ved å presse på
+øvre bevegelsessensor, og nedover ved å presse på nedre
+bevegelsessensor. For å gå tilbake til normalmodus, trykker man på en
+av knappsensorene.
 
-### 6.4.4 Drøfting
+### 6.4.4 Drøfting {#sec-andredrofting}
 
-Andre tilnærming er utførlig testet i kapittel 7. Den viktigste
-forskjellen fra første tilnærming er «ett-trykk-funksjonaliteten», som
-hindrer at tungen slites ut selv etter langvarig bruk. Den forbedrede
+Andre tilnærming er utførlig testet i
+[kapittel 7](#sec-testingmedtungen). Den viktigste forskjellen fra
+første tilnærming er «ett-trykk-funksjonaliteten», som hindrer at
+tungen slites ut selv etter langvarig bruk. Den forbedrede
 sensorplasseringen motvirker også dette.
 
 Presisjonen er betraktelig bedre takket være den langsommere
@@ -1211,13 +1249,15 @@ Den største utfordringen er å lære opp tungen til å huske sensorenes
 plassering på kinnet. Dette blir bedre over tid, men krever litt
 tålmodighet og innsats.
 
-7 Testing med tungen
+7 Testing med tungen {#sec-testingmedtungen}
 ====================
 
 > Inneholder en grundig test -- med resultater -- av funksjonaliteten
-> og brukervennlighet til de to tilnærmingene i kapittel 6. Viser at
-> andre tilnærming er en god forbedring av den første. Videre drøfting
-> er gitt i forrige kapittel, avsnitt 6.3.3 og 6.4.4.
+> og brukervennlighet til de to tilnærmingene i
+> [kapittel 6](#sec-funksjonalitet). Viser at andre tilnærming er en
+> god forbedring av den første. Videre drøfting er gitt i forrige
+> kapittel, [avsnitt 6.3.3](#sec-forstedrofting) og
+> [6.4.4](#sec-andredrofting).
 
 7.1 Problemstilling
 -------------------
@@ -1247,25 +1287,26 @@ enkle tester med stigende vanskelighetsgrad.
     «Favoritter» eller hurtigmeny (f.eks. <http://www.vg.no/>), bla ned
     på siden og åpne en artikkel.
 4.  **Bruk over tid:** åpne Microsoft Paint og prøv å tegne en kopi av
-    figur 7.1a. Etter 15 minutter avsluttes testen, og resultatet
-    sammenlignes med originalen. Er resultatet bra, og er tungen
-    sliten? Utfør testen to ganger for å se om det er en liten
-    tilvenningskurve fra brukersiden.
+    [figur 7.1a](#fig-brukertest1). Etter 15 minutter avsluttes
+    testen, og resultatet sammenlignes med originalen. Er resultatet
+    bra, og er tungen sliten? Utfør testen to ganger for å se om det
+    er en liten tilvenningskurve fra brukersiden.
 
 Testen er utført med hodebøylen, men testeren har lagt ekstra trykk
 bak sensorplatene med hendene. Med en bedre hodebøyle vil dette være
-unødvendig (se kapittel 10).
+unødvendig (se [kapittel 10](#sec-veienvidere)).
 
 ### 7.2.1 Resultater første tilnærming
 
-> ![](fig/brukertest.png)
+> ![](fig/brukertest.png) {#fig-brukertest1}
 >
-> ![](fig/brukertestresultat1a.png)
+> ![](fig/brukertestresultat1a.png) {#fig-brukertestresultat1a}
 >
 > **Figur 7.1:** Testtegning for bruk over tid (a), resultat i første
-> tilnærming (b), første og eneste forsøk
+> tilnærming (b), første og eneste forsøk {#fig-forstebrukertest}
 
-Se avsnitt 6.3 for detaljer om første tilnærming.
+Se [avsnitt 6.3](#sec-forstetilnerming) for detaljer om første
+tilnærming.
 
 1.  **Åpne en snarvei fra skrivebordet:** Musepekeren danser litt over
     skjermen, men med litt godvilje blir pekeren plassert over den
@@ -1288,22 +1329,23 @@ Se avsnitt 6.3 for detaljer om første tilnærming.
     rundt på skjermen.
 4.  **Bruk over tid:** Ga opp etter syv minutter. Ble utrolig hemmet av
     at pekeren beveget seg for fort, og ble veldig sliten. Resultatet
-    er gitt i figur 7.1b.
+    er gitt i [figur 7.1b](#fig-brukertestresultat1a).
 
-For drøfting av resultatene, se avsnitt 6.3.3.
+For drøfting av resultatene, se [avsnitt 6.3.3](#sec-forstedrofting).
 
 ### 7.2.2 Resultater andre tilnærming
 
-> ![](fig/brukertest.png)
+> ![](fig/brukertest.png) {#fig-brukertest2}
 >
-> ![](fig/brukertestresultat2a.png)
+> ![](fig/brukertestresultat2a.png) {#fig-brukertestresultat2a}
 >
-> ![](fig/brukertestresultat2b.png)
+> ![](fig/brukertestresultat2b.png) {#fig-brukertestresultat2b}
 >
 > **Figur 7.2:** Testtegning for bruk over tid (a), resultat i andre
-> tilnærming første forsøk (b), andre forsøk (c)
+> tilnærming første forsøk (b), andre forsøk (c) {#fig-andrebrukertest}
 
-Se avsnitt 6.4 for detaljer om andre tilnærming.
+Se [avsnitt 6.4](#sec-andretilnerming) for detaljer om andre
+tilnærming.
 
 1.  **Åpne en snarvei fra skrivebordet:** Litt vansker med å treffe
     rett sensor gjør at pekeren til tider beveger seg feil vei. Trykker
@@ -1316,10 +1358,12 @@ Se avsnitt 6.4 for detaljer om andre tilnærming.
     bruk.
 4.  **Bruk over tid:** Den delen av tegningen som krever høyest
     presisjon, blomsten med blad og den dråpeformede figuren, er litt
-    vanskelig. Men av fremskrittet fra figur 7.2b til figur 7.2c ser
-    man at dette kan bli meget bra med litt øvelse.
+    vanskelig. Men av fremskrittet fra
+    [figur 7.2b](#fig-brukertestresultat2a) til
+    [figur 7.2c](#fig-brukertestresultat2b) ser man at dette kan bli
+    meget bra med litt øvelse.
 
-For drøfting av resultatene, se avsnitt 6.4.4.
+For drøfting av resultatene, se [avsnitt 6.4.4](#sec-andredrofting).
 
 8 Prisestimering
 ================
@@ -1333,11 +1377,12 @@ For drøfting av resultatene, se avsnitt 6.4.4.
 
 Prosjektet er en bacheloroppgave på HiST. Studentene får ikke lønn
 under arbeidet, så utgiftene er konsentrert rundt materialkostnadene i
-tabell 8.1. Sensorene ble kjøpt inn av SINTEF, og AT90USBKey ble kjøpt
-inn av HiST. Tabellen lister opp antatte kostnader for disse.
-Prosjektets tilnærmede utgifter er 1949 NOK i materialkostnader. Siden
-dette er de eneste utgiftene, kan man konkludere med at prosjektet har
-vært særdeles billig for oppdragsgiver.
+[tabell 8.1](#tab-utviklingskostnader). Sensorene ble kjøpt inn av
+SINTEF, og AT90USBKey ble kjøpt inn av HiST. Tabellen lister opp
+antatte kostnader for disse. Prosjektets tilnærmede utgifter er 1949
+NOK i materialkostnader. Siden dette er de eneste utgiftene, kan man
+konkludere med at prosjektet har vært særdeles billig for
+oppdragsgiver.
 
 Forslag til løskomponenter består av en liste som inneholder overslag
 over priser en eventuell egenproduksjon av kretsen vil koste. For 100
@@ -1345,20 +1390,20 @@ enheter vil de løse materialene til kretskortet tilnærme en kostnad på
 13 518 NOK. Siden kretsen ikke er designet, kan denne prisen avvike
 noe. Det er ikke laget noen liste for materialpris til produksjon av
 hodebøylen. Det forventes at designen og materialvalget på denne må
-utvikles videre (se kapittel 10).
+utvikles videre (se [kapittel 10](#sec-veienvidere)).
 
-> **Tabell 8.1:** Materialkostnader uten frakt
+> **Tabell 8.1:** Materialkostnader uten frakt {#tab-utviklingskostnader}
 >
 > | Produktnavn         | Produsent                 | Type                       | Antall | Enhetspris [NOK] | Total pris [NOK] | Firma                 |
 > | ------------------- | --------------------------| -------------------------- | ------ | ----------       | ----------       | --------------------- |
-> | AT90USBKey          | Atmel                     | Demokrets*                 | 2      | 229              | 458              | Mouser electronics    |
-> | FSR-400             | Interlink                 | Trykkfølsom resistans*     | 25     | 23               | 575              | Interlink Electronics |
-> | FSR-402             | Interlink                 | Trykkfølsom resistans*     | 25     | 26               | 650              | Interlink Electronics |
+> | AT90USBKey          | Atmel                     | Demokrets[^11]             | 2      | 229              | 458              | Mouser electronics    |
+> | FSR-400             | Interlink                 | Trykkfølsom resistans[^11] | 25     | 23               | 575              | Interlink Electronics |
+> | FSR-402             | Interlink                 | Trykkfølsom resistans[^11] | 25     | 26               | 650              | Interlink Electronics |
 > | Veroboard           |                           | Koblingsbrett              | 1      | 59               | 59               | Clas Ohlson           |
 > | Teip                |                           | Gaffateip                  | 1      | 79               | 79               | Clas Ohlson           |
 > | Metall 1            |                           | Stakepinne                 | 7,6 m  | 39               | 39               | Jula                  |
 > | Metall 2            |                           | Spikerbånd 20 × 1 mm       | 10 m   | 89               | 89               | Clas Ohlson           |
-> |                     |                           | Koblingsenheter**          | 1      | --               | --               | HiST                  |
+> |                     |                           | Koblingsenheter[^12]       | 1      | --               | --               | HiST                  |
 > |                     |                           |                            |        |                  |                  |                       |
 > |                     |                           | Forslag til løskomponenter |        |                  |                  |                       |
 > |                     |                           |                            |        |                  |                  |                       |
@@ -1374,15 +1419,15 @@ utvikles videre (se kapittel 10).
 > | 500075-1517         | Molex                     | USB Mini-B vert            | 1      | 51               | 51               | Mouser electronics    |
 > | 500075-1517         |                           |                            | 100    | 29,43            | 2943             |                       |
 > | 500075-1517         |                           |                            | 1000   | 24,09            | 24090            |                       |
-> | Motstander          |                           | Laveffektmotstander*       | 1000   | 0,0594           | 59,4             |                       |
-> | Kretskort           |                           | To-lags PCB*               | 100    | 21,4             | 2140 + 278       | Microcirtec           |
+> | Motstander          |                           | Laveffektmotstander[^11]   | 1000   | 0,0594           | 59,4             |                       |
+> | Kretskort           |                           | To-lags PCB[^11]           | 100    | 21,4             | 2140 + 278       | Microcirtec           |
 > | Kretskort           |                           |                            | 1000   | 3,219            | 3219 + 730       |                       |
 >
 > Tabellen benytter seg av omregningene € = 8,7 NOK og $ = 6,6 NOK.
 
-> \* Tilnærmede priser.
+[^11]: Tilnærmede priser.
 
-> \*\* Skruer/muttrer/ledninger og lignende.
+[^12]: Skruer/muttrer/ledninger og lignende.
 
 9 Konklusjon
 ============
@@ -1453,23 +1498,23 @@ På bakgrunn av rapporten, konkluderer prosjektgruppen med at det er
 mulig å lage en tungestyrt musepeker som anvist. Det mekaniske og
 ergonomiske må imidlertid forbedres for å få et salgbart produkt.
 
-10 Veien videre
+10 Veien videre {#sec-veienvidere}
 ===============
 
 > Inneholder en oversikt over hva prosjektgruppen mener kan
 > vidreutvikles for enten å forbedre noe som allerede er implementert,
 > eller forslag til hva som kan implementeres.
 
-10.1 Hodebøylen
+10.1 Hodebøylen {#sec-vvidere-hodeboyle}
 ---------------
 
 Hvis man designer et eget kretskort, kan kortets størrelse minskes
 betraktelig, slik at det kan gjøres plass til det på hodebøylen. Dette
-vil være mer praktisk framfor å ha et mellomledd som «X-box». Den
-eneste kabelen fra hodebøylen vil da være USB-kabelen, som settes rett
-i PC-en. Denne kabelen vil også kunne tas helt av i andre enden. Det
-vil da være enklere å sette hodebøylen på bruker, og feste USB-kabelen
-etter at alt av utstyr er på plass.
+vil være mer praktisk framfor å ha et mellomledd som
+«[X-box](#sec-xbox)». Den eneste kabelen fra hodebøylen vil da være
+USB-kabelen, som settes rett i PC-en. Denne kabelen vil også kunne tas
+helt av i andre enden. Det vil da være enklere å sette hodebøylen på
+bruker, og feste USB-kabelen etter at alt av utstyr er på plass.
 
 Det neste vil være å forme platene brukt til justeringsboksen eller
 ev. hele justeringsboksen. Det vil være ønskelig å kunne sette en
@@ -1499,7 +1544,7 @@ hvor tungen trykker, og en bedre brukeropplevelse. Det kan være
 ønskelig med et «mellomlegg» mellom kinnet og sensorene for å
 kontrolere treffpunktet.
 
-10.2 Elektronikk
+10.2 Elektronikk {#sec-vvidere-krets}
 ----------------
 
 Det vil være nødvendig å designe en egen krets rundt
@@ -1511,7 +1556,7 @@ ikke er i bruk, og det vil ikke være nødvendig med batteribytte eller
 ekstern lader. Om batteriet ikke får ladet lenge nok, bør det være
 mulig å bruke USB-grensesnittet.
 
-### 10.2.1 Bruk av batteri som strømforsyning
+### 10.2.1 Bruk av batteri som strømforsyning {#sec-bbstrom}
 
 Den innebygde spenningskretsen på AT90USBKey gjør at den kan forsynes
 med batterispenninger mellom 8--15 V (DC). Ved normal bruk blir det
@@ -1521,34 +1566,34 @@ spenningsforsyningen fra AT90USBKey. Ved opperasjon vil denne øke
 forbruket med 18,3 mA, slik at totalforbruket blir ca. 28 mA.
 
 En oversikt over brukertid med ulike batterier tilkoblet kretsen er
-gitt i tabell 10.1. Det er også mulig å legge en funksjon inn i
-programkoden som gjør at Bluetooth-modulen går i hvilemodus ved
-inaktivitet. Funksjoner som ikke er i bruk, vil slås av, og
-strømforbruket vil falle betraktelig.
+gitt i [tabell 10.1](#tab-batteri). Det er også mulig å legge en
+funksjon inn i programkoden som gjør at Bluetooth-modulen går i
+hvilemodus ved inaktivitet. Funksjoner som ikke er i bruk, vil slås
+av, og strømforbruket vil falle betraktelig.
 
-Som man kan se av tabell 10.1, gir litiumbatterier overlegen kapasitet
-fremfor standard NiMh-batterier (nikkel-metalhydrid). For å få samme
-kapasitet fra NiMh-batterier, vil vekten og størrelsen disse krever
-gjøre det vanskelig å integrere kretsen på hodebøylen. Ulempen med
-litiumbatterier er at de krever en dedikert lader, og at de kan
-eksplodere ved overoppheting/belastning.
+Som man kan se av [tabell 10.1](#tab-batteri), gir litiumbatterier
+overlegen kapasitet fremfor standard NiMh-batterier
+(nikkel-metalhydrid). For å få samme kapasitet fra NiMh-batterier, vil
+vekten og størrelsen disse krever gjøre det vanskelig å integrere
+kretsen på hodebøylen. Ulempen med litiumbatterier er at de krever en
+dedikert lader, og at de kan eksplodere ved overoppheting/belastning.
 
 En liten innebygd krets hindrer at batteriet blir utladet under en
 gitt spenning, og ved ladning fungerer den samme kretsen slik at
 batteriet ikke skal overlades. Uten denne ville batteriet ha blitt
 ødelagt.
 
-> **Tabell 10.1:** Teoretisk operasjonstid med ulike batterityper
+> **Tabell 10.1:** Teoretisk operasjonstid med ulike batterityper {#tab-batteri}
 >
-> | Batteritype        | Spenning [V] | Kapasitet [mAh] | Belastningsstrøm [mA] | Operasjonstid [h] | Vekt [g]   |
-> | ------------------ | ------------ | --------------- | --------------------- | ----------------- | ---------- |
-> | HR6F22 Ni-MH       | 8,4          | 200             | 30,0                  | 6,7               | 39         |
-> | 6F22 Litium*       | 9,0          | 500             | 28,0                  | 17,9              | 28         |
-> | U9VLJ10 Litium*    | 9,0          | 1200            | 28,0                  | 42,9              | 38         |
-> | AAA Ni-MH 8x serie | 8 × 1,2      | 1000            | 26,3                  | 38,0              | 8 × 16     |
-> | AA Ni-MH 8x serie  | 8 × 1,2      | 2700            | 26,3                  | 102,7             | 8 × 30     |
+> | Batteritype         | Spenning [V] | Kapasitet [mAh] | Belastningsstrøm [mA] | Operasjonstid [h] | Vekt [g]   |
+> | ------------------- | ------------ | --------------- | --------------------- | ----------------- | ---------- |
+> | HR6F22 Ni-MH        | 8,4          | 200             | 30,0                  | 6,7               | 39         |
+> | 6F22 Litium[^13]    | 9,0          | 500             | 28,0                  | 17,9              | 28         |
+> | U9VLJ10 Litium[^13] | 9,0          | 1200            | 28,0                  | 42,9              | 38         |
+> | AAA Ni-MH 8x serie  | 8 × 1,2      | 1000            | 26,3                  | 38,0              | 8 × 16     |
+> | AA Ni-MH 8x serie   | 8 × 1,2      | 2700            | 26,3                  | 102,7             | 8 × 30     |
 
-> \* Tilpasset lader må anvendes for lading av litiumbatterier.
+[^13]: Tilpasset lader må anvendes for lading av litiumbatterier.
 
 ### 10.2.2 Bluetooth
 
@@ -1566,29 +1611,33 @@ sikkerheten, benytter Bluetooth seg av frekvens-hopping (Frequency
 Hopping Spread Spectrum, FHSS). Dette fungerer ved at sender og
 mottager «hopper» fra frekvens til frekvens hele tiden etter et
 bestemt mønster, i frekvensområdet 2,402 GHz til 2,480 Ghz
-[Bluetooth]. En ulempe ved bruk av denne teknologien som
-brukergrensesnitt, er at det kan oppstå forsinkelse hvis datamaskinen
-belastes med parallelle oppgaver. Siden kretsen ikke lenger vil være
-tilkoblet USB, må den få strømtilførsel fra et batteri eller annen
-ekstern strømforsyning, som beskrevet i kapittel 5 og kapittel 10.2.1.
+[[Bluetooth](#ref-bluetooth)]. En ulempe ved bruk av denne teknologien
+som brukergrensesnitt, er at det kan oppstå forsinkelse hvis
+datamaskinen belastes med parallelle oppgaver. Siden kretsen ikke
+lenger vil være tilkoblet USB, må den få strømtilførsel fra et batteri
+eller annen ekstern strømforsyning, som beskrevet i
+[kapittel 5](#sec-elektronikk) og [kapittel 10.2.1](#sec-bbstrom).
 
 Bibliografi
 ===========
 
 [Bluetooth] <http://www.bluetooth.com/Bluetooth/Technology/Works/>.
+{#ref-bluetooth}
 
-[Vedlegg 1] Programkode, dokumentert.
+[Vedlegg 1] Programkode, dokumentert. {#ref-program}
 
-[Vedlegg 2] Datablad for Interlink sensorer.
+[Vedlegg 2] Datablad for Interlink-sensorer. {#ref-interlink}
 
-[Vedlegg 3] Datablad for AT90USBKey.
+[Vedlegg 3] Datablad for AT90USBKey. {#ref-usbkey}
 
-[Vedlegg 4] Datablad for mikrokontrolleren.
+[Vedlegg 4] Datablad for mikrokontrolleren. {#ref-uk}
 
-Bilag: CD
+Bilag: CD {#sec-cd}
 =========
 
-Vedlegg 1--4 foreligger på [CD](cd/), organisert som følger:
+Vedlegg 1--4 foreligger på
+[CD](https://github.com/epsil/tunge/tree/master/cd), organisert som
+følger:
 
 Vedlegg 1: Programkode
 ----------------------
@@ -1596,7 +1645,7 @@ Vedlegg 1: Programkode
 Plassert i mappen `/Program`. Lisens for Atmel-kode har plasseringen
 `/Program/at90usb128/demo/series6-hidmouse/LICENSE.txt`.
 
-Vedlegg 2: Datablad for Interlink sensorer
+Vedlegg 2: Datablad for Interlink-sensorer
 ------------------------------------------
 
 Plassert i mappen `/Datablader/Trykksensorer`.
